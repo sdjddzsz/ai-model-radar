@@ -1,0 +1,11 @@
+# 抓取的数据缓存（可随时删，自动重建）
+cache/
+
+# 本机专属任务画像 —— 含个人信息，永远不要提交
+profile.local.mjs
+
+# 系统杂项
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext y='13' font-size='14'%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E">
+<title>AI 模型雷达</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg:#f4f6fb; --card:#fff; --line:#e6e9f2; --ink:#161c2e; --ink2:#5a6480; --ink3:#98a1b8;
+    --acc:#4b63f0; --acc2:#7b4bf0; --accS:rgba(75,99,240,.09);
+    --ok:#0fa06e; --okS:rgba(15,160,110,.10);
+    --warn:#e0812a; --warnS:rgba(224,129,42,.11);
+    --bad:#dd4b4b; --badS:rgba(221,75,75,.10);
+    --unit:#f5f7fd; --shadow:0 10px 30px -14px rgba(24,34,70,.18);
+  }
+  body { background:var(--bg); color:var(--ink); font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+
+  header { position:sticky; top:0; z-index:40; background:rgba(255,255,255,.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+  .hwrap { max-width:1240px; margin:0 auto; padding:12px 22px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .logo { display:flex; align-items:center; gap:9px; }
+  .logo b { font-size:17px; letter-spacing:.3px; }
+  .logo .sub { font-size:11px; color:var(--ink3); margin-left:2px; }
+  .spacer { flex:1; }
+  .meta { font-size:11.5px; color:var(--ink3); text-align:right; line-height:1.5; }
+  .meta b { color:var(--ink2); font-weight:600; }
+  button { font-family:inherit; cursor:pointer; }
+  .btn { border:1px solid var(--line); background:var(--card); color:var(--ink2); border-radius:9px; padding:7px 13px; font-size:12.5px; font-weight:600; transition:.15s; }
+  .btn:hover { border-color:var(--acc); color:var(--acc); }
+  .btn.pri { background:linear-gradient(120deg,var(--acc),var(--acc2)); color:#fff; border:none; box-shadow:0 6px 16px -8px var(--acc); }
+  .btn.pri:hover { filter:brightness(1.07); color:#fff; }
+  .btn:disabled { opacity:.55; cursor:default; }
+
+  nav { max-width:1240px; margin:0 auto; padding:0 22px; display:flex; gap:4px; overflow-x:auto; }
+  .tab { border:none; background:transparent; padding:11px 15px 12px; font-size:13.5px; font-weight:600; color:var(--ink3); border-bottom:2.5px solid transparent; white-space:nowrap; transition:.15s; }
+  .tab:hover { color:var(--ink2); }
+  .tab.on { color:var(--acc); border-bottom-color:var(--acc); }
+
+  main { max-width:1240px; margin:0 auto; padding:20px 22px 70px; }
+  .page { display:none; } .page.on { display:block; }
+
+  .grid { display:grid; gap:14px; }
+  .g2 { grid-template-columns:repeat(auto-fit,minmax(430px,1fr)); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); }
+  .chd { padding:14px 17px 12px; display:flex; align-items:center; gap:9px; border-bottom:1px solid var(--line); }
+  .chd h3 { font-size:14px; font-weight:700; flex:1; }
+  .chd .hint { font-size:11px; color:var(--ink3); }
+  .cbody { padding:12px 17px 15px; }
+
+  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  th { text-align:left; font-size:10.5px; color:var(--ink3); font-weight:700; letter-spacing:.4px; padding:6px 8px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  td { padding:8px; border-bottom:1px solid #f1f3f9; vertical-align:middle; }
+  tr:last-child td { border-bottom:none; }
+  tbody tr { transition:.12s; }
+  tbody tr.click:hover { background:var(--accS); cursor:pointer; }
+  td.num { font-variant-numeric:tabular-nums; color:var(--ink2); }
+  .rk { display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; border-radius:6px; font-size:10.5px; font-weight:800; background:var(--unit); color:var(--ink3); }
+  .rk.g { background:linear-gradient(135deg,#ffd86e,#f0a93a); color:#5b3a00; }
+  .rk.s { background:linear-gradient(135deg,#e3e7f0,#c3c9d8); color:#4a5060; }
+  .rk.b { background:linear-gradient(135deg,#f0c78a,#d89253); color:#5a3410; }
+
+  .badge { display:inline-block; font-size:10px; font-weight:700; padding:2.5px 7px; border-radius:6px; background:var(--unit); color:var(--ink2); white-space:nowrap; }
+  .badge.open { background:var(--okS); color:var(--ok); }
+  .badge.closed { background:var(--badS); color:var(--bad); }
+  .badge.unk { background:var(--unit); color:var(--ink3); }
+  .badge.free { background:var(--okS); color:var(--ok); }
+  .badge.cap { background:var(--accS); color:var(--acc); }
+  .badge.warn { background:var(--warnS); color:var(--warn); }
+  .badge.stale { background:var(--warnS); color:var(--warn); }
+
+  .toolbar { display:flex; gap:9px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+  input, select { font-family:inherit; font-size:12.5px; color:var(--ink); background:var(--card); border:1px solid var(--line); border-radius:9px; padding:8px 11px; outline:none; transition:.15s; }
+  input:focus, select:focus { border-color:var(--acc); box-shadow:0 0 0 3px var(--accS); }
+  input[type=search] { min-width:230px; flex:1; }
+  .chip { border:1px solid var(--line); background:var(--card); color:var(--ink2); border-radius:8px; padding:6px 10px; font-size:11.5px; font-weight:600; transition:.14s; }
+  .chip.on { background:var(--acc); color:#fff; border-color:var(--acc); }
+
+  .mgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(286px,1fr)); gap:12px; }
+  .mcard { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:13px 14px; cursor:pointer; transition:.16s; display:flex; flex-direction:column; gap:8px; }
+  .mcard:hover { border-color:var(--acc); box-shadow:0 10px 26px -16px rgba(75,99,240,.5); transform:translateY(-2px); }
+  .mcard .top { display:flex; gap:8px; align-items:flex-start; }
+  .mcard .nm { font-size:13px; font-weight:700; line-height:1.35; flex:1; }
+  .mcard .vd { font-size:10.5px; color:var(--ink3); margin-top:2px; }
+  .mcard .row { display:flex; gap:6px; flex-wrap:wrap; }
+  .mcard .kv { display:flex; gap:10px; font-size:11px; color:var(--ink2); font-variant-numeric:tabular-nums; flex-wrap:wrap; }
+  .mcard .kv b { font-weight:700; color:var(--ink); }
+  .more { display:block; margin:18px auto 0; }
+
+  .empty { padding:26px; text-align:center; color:var(--ink3); font-size:12.5px; }
+  .loading { padding:50px; text-align:center; color:var(--ink3); font-size:13px; }
+  .spin { display:inline-block; width:16px; height:16px; border:2.5px solid var(--accS); border-top-color:var(--acc); border-radius:50%; animation:sp .8s linear infinite; vertical-align:-3px; margin-right:8px; }
+  @keyframes sp { to { transform:rotate(360deg); } }
+
+  .note { font-size:11.5px; color:var(--ink3); line-height:1.65; background:var(--unit); border-radius:11px; padding:10px 13px; }
+  .note b { color:var(--ink2); }
+  a { color:var(--acc); text-decoration:none; } a:hover { text-decoration:underline; }
+
+  /* 弹窗 */
+  .mask { position:fixed; inset:0; background:rgba(18,24,44,.44); backdrop-filter:blur(3px); opacity:0; pointer-events:none; transition:.2s; z-index:80; }
+  .mask.on { opacity:1; pointer-events:auto; }
+  .modal { position:fixed; left:50%; top:50%; transform:translate(-50%,-46%) scale(.96); width:min(720px,94vw); max-height:88vh; overflow:auto;
+    background:var(--card); border:1px solid var(--line); border-radius:20px; box-shadow:0 30px 80px -26px rgba(10,16,40,.5);
+    opacity:0; pointer-events:none; transition:.22s cubic-bezier(.34,1.2,.5,1); z-index:81; }
+  .modal.on { opacity:1; pointer-events:auto; transform:translate(-50%,-50%) scale(1); }
+  .mhead { padding:18px 22px 14px; border-bottom:1px solid var(--line); display:flex; gap:12px; align-items:flex-start; position:sticky; top:0; background:var(--card); z-index:2; border-radius:20px 20px 0 0; }
+  .mhead h2 { font-size:17px; font-weight:800; line-height:1.35; }
+  .mhead .id { font-size:11px; color:var(--ink3); font-family:ui-monospace,Consolas,monospace; margin-top:4px; }
+  .x { margin-left:auto; border:1px solid var(--line); background:var(--unit); color:var(--ink2); width:30px; height:30px; border-radius:9px; font-size:14px; flex:none; }
+  .x:hover { color:var(--bad); border-color:var(--bad); }
+  .mbody { padding:18px 22px 24px; }
+  .sect { margin-bottom:20px; }
+  .sect h4 { font-size:11px; letter-spacing:1px; color:var(--ink3); font-weight:800; margin-bottom:9px; }
+  .kvgrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:9px; }
+  .kvbox { background:var(--unit); border:1px solid var(--line); border-radius:11px; padding:9px 11px; }
+  .kvbox .k { font-size:10px; color:var(--ink3); font-weight:700; }
+  .kvbox .v { font-size:13.5px; font-weight:800; margin-top:3px; font-variant-numeric:tabular-nums; }
+  .kvbox .v small { font-size:10px; color:var(--ink3); font-weight:600; }
+  .desc { font-size:12.5px; line-height:1.75; color:var(--ink2); }
+  .recbox { display:flex; gap:9px; flex-wrap:wrap; }
+  .rec { background:var(--unit); border:1px solid var(--line); border-radius:11px; padding:9px 12px; font-size:12px; flex:1; min-width:190px; }
+  .rec b { display:block; font-size:12.5px; margin-bottom:3px; }
+  .rec span { color:var(--ink3); font-size:11px; line-height:1.55; display:block; }
+
+  .combo { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:11px; }
+  .cc { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:13px 15px; }
+  .cc .tag { display:inline-block; font-size:10px; font-weight:800; background:var(--accS); color:var(--acc); padding:2.5px 8px; border-radius:6px; margin-bottom:7px; }
+  .cc b { font-size:13px; display:block; margin-bottom:5px; }
+  .cc p { font-size:11.5px; color:var(--ink2); line-height:1.65; }
+
+  .news { display:flex; flex-direction:column; gap:2px; }
+  .ni { display:flex; gap:10px; align-items:baseline; padding:8px 6px; border-radius:9px; }
+  .ni:hover { background:var(--unit); }
+  .ni .d { font-size:10.5px; color:var(--ink3); flex:none; width:78px; font-variant-numeric:tabular-nums; }
+  .ni .t { font-size:12.5px; flex:1; line-height:1.5; }
+  .ni .s { font-size:10px; color:var(--ink3); flex:none; background:var(--unit); padding:2px 6px; border-radius:5px; }
+
+  .trchips { display:flex; flex-wrap:wrap; gap:8px; }
+  .tc { border:1px solid var(--line); background:var(--unit); border-radius:10px; padding:7px 11px; font-size:12px; cursor:pointer; transition:.14s; }
+  .tc:hover { border-color:var(--acc); background:var(--accS); }
+  .tc b { font-weight:800; }
+  .tc i { font-style:normal; color:var(--ink3); font-size:10.5px; margin-left:4px; }
+
+  footer { max-width:1240px; margin:0 auto; padding:0 22px 30px; font-size:11px; color:var(--ink3); line-height:1.8; }
+.fgroup{margin-bottom:18px}
+.fgroup .gh{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--ink2);margin:4px 0 10px;padding-left:10px;border-left:3px solid var(--acc)}
+.fgroup .gh .cnt{font-size:11px;color:var(--ink3);font-weight:500}
+
+/* ===== 使用方案页 ===== */
+.pl-ctl .pl-slider{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:12px}
+.pl-ctl .pl-slider input[type=range]{flex:1;min-width:190px;accent-color:var(--acc)}
+.pl-ctl .pl-slider .lab{font-size:11.5px;color:var(--ink3);font-weight:700}
+.pl-ctl .pl-slider .val{font-size:13px;color:var(--acc);min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
+.pl-inputs{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--ink2)}
+.pl-inputs label{display:inline-flex;align-items:center;gap:6px}
+.pl-inputs label.ck{cursor:pointer}
+.pl-inputs input[type=number]{padding:6px 9px;width:88px}
+.pl-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-bottom:14px}
+.pl-sum .sc{background:var(--unit);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+.pl-sum .sc .k{font-size:10.5px;color:var(--ink3);font-weight:700}
+.pl-sum .sc .v{font-size:12.5px;color:var(--ink2);line-height:1.65;margin-top:4px}
+.pl-tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:11px}
+.pl-tk{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 13px;transition:.15s}
+.pl-tk.on{border-color:var(--acc);box-shadow:0 0 0 3px var(--accS)}
+.pl-tk:hover{border-color:var(--acc)}
+.pl-tk .hd{display:flex;gap:8px;align-items:flex-start}
+.pl-tk .hd b{font-size:12.5px;line-height:1.35;flex:1}
+.pl-tk .ev{font-size:10.5px;color:var(--ink3);line-height:1.6;margin-top:7px;word-break:break-all}
+.pl-tk .mt{display:flex;gap:9px;flex-wrap:wrap;font-size:10.5px;color:var(--ink2);margin-top:8px;font-variant-numeric:tabular-nums}
+.pl-tk .mt span b{color:var(--ink)}
+.pl-tk .nt{font-size:11px;color:var(--ink2);line-height:1.6;margin-top:7px;border-top:1px dashed var(--line);padding-top:7px}
+.pl-chain{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:11.5px}
+.pl-chain .step{background:var(--unit);border:1px solid var(--line);border-radius:9px;padding:5px 9px;white-space:nowrap}
+.pl-chain .step.main{background:var(--okS);border-color:rgba(15,160,110,.35);color:var(--ok);font-weight:700}
+.pl-chain .step.last{background:var(--accS);border-color:rgba(75,99,240,.3);color:var(--acc)}
+.pl-chain .ar{color:var(--ink3)}
+.pl-over{color:var(--bad)} .pl-under{color:var(--ok)}
+pre.pl-code{background:#1e2433;color:#e8ecf5;padding:13px 15px;border-radius:11px;overflow-x:auto;font-size:12px;line-height:1.7;margin:10px 0}
+pre.pl-code .k{color:#7dd3fc} pre.pl-code .s{color:#fca5a5} pre.pl-code .c{color:#64748b}
+.pl-fbrow{display:grid;grid-template-columns:1fr;gap:10px}
+.pl-provgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:11px}
+.pl-bar{height:6px;background:var(--unit);border-radius:4px;overflow:hidden;margin-top:5px}
+.pl-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:4px}
+.pl-bar i.over{background:linear-gradient(90deg,#f0a93a,#dd4b4b)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="logo">
+      <b>🧭 AI 模型雷达</b>
+      <span class="sub">模型 · 价格 · 客户端 · 动向</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="meta" id="meta">正在拉取数据…</div>
+    <button class="btn pri" id="refresh">↻ 刷新数据</button>
+  </div>
+  <nav>
+    <button class="tab on" data-p="rank">📊 排行榜</button>
+    <button class="tab" data-p="cn">🇨🇳 国产模型</button>
+    <button class="tab" data-p="models">🧠 模型库</button>
+    <button class="tab" data-p="client">🖥️ 客户端怎么选</button>
+    <button class="tab" data-p="trend">📰 趋势动态</button>
+    <button class="tab" data-p="free">🛰️ 免费接口</button>
+    <button class="tab" data-p="plan">🧭 使用方案</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ================= 排行榜 ================= -->
+  <section class="page on" id="p-rank">
+    <div class="grid g2">
+      <div class="card"><div class="chd"><h3>🔥 开源模型热度榜</h3><span class="hint">Hugging Face 真实下载/点赞</span></div>
+        <div class="cbody" id="rank-hf"></div></div>
+      <div class="card"><div class="chd"><h3>💰 性价比榜</h3><span class="hint">按每百万 token 总价排序</span></div>
+        <div class="cbody" id="rank-price"></div></div>
+      <div class="card"><div class="chd"><h3>🆕 最新上线</h3><span class="hint">OpenRouter 按发布时间</span></div>
+        <div class="cbody" id="rank-new"></div></div>
+      <div class="card"><div class="chd"><h3>🏆 官方能力跑分榜</h3><span class="hint">需要浏览器直接访问</span></div>
+        <div class="cbody" id="rank-official"></div></div>
+      <div class="card" style="grid-column:1/-1"><div class="chd"><h3>📚 模型梯队速查</h3><span class="hint">内置参考，定性描述 · 不含跑分</span></div>
+        <div class="cbody" id="rank-tier"></div></div>
+    </div>
+  </section>
+
+  <!-- ================= 国产模型对比 ================= -->
+  <section class="page" id="p-cn">
+    <div class="note" style="margin-bottom:14px">🇨🇳 专门把 <b>国产 AI 模型</b> 拎出来横向对比：DeepSeek / 阿里 Qwen / 月之暗面 Kimi / 智谱 GLM / MiniMax / 阶跃星辰 / 字节豆包 / 百度 等。价格已按实时汇率换算成 <b>人民币</b>，点任意一行看完整详情。</div>
+    <div class="toolbar">
+      <select id="cnVendor"><option value="">全部国产厂商</option></select>
+      <select id="cnSort">
+        <option value="cheap">最便宜优先</option>
+        <option value="ctx">上下文最长</option>
+        <option value="new">最新发布</option>
+        <option value="name">名称</option>
+      </select>
+      <button class="chip" data-cn="open">🔓 仅开源</button>
+      <button class="chip" data-cn="free">🆓 免费</button>
+      <button class="chip" data-cn="reasoning">🧠 推理</button>
+      <button class="chip" data-cn="vision">👁 视觉</button>
+      <button class="chip" data-cn="tools">🔧 工具</button>
+    </div>
+    <div class="card" style="margin-bottom:14px"><div class="chd"><h3>📋 国产模型横向对比</h3><span class="hint">按每百万 token 计价 · 人民币</span></div>
+      <div class="cbody" id="cnTable"></div></div>
+    <button class="btn more" id="cnMore" style="display:none;margin:0 auto 14px">显示更多 ↓</button>
+    <div class="card"><div class="chd"><h3>🏷️ 按厂商速览</h3><span class="hint">点卡片可筛选 · 链接点击直达</span></div>
+      <div class="cbody" id="cnVendorCards"></div></div>
+    <div class="card" style="margin-top:14px"><div class="chd"><h3>🆓 免费 API 接口提供商</h3><span class="hint">点击直达官网 · 注册一般有免费额度</span></div>
+      <div class="cbody" id="cnFreeApi"></div></div>
+  </section>
+
+  <!-- ================= 模型库 ================= -->
+  <section class="page" id="p-models">
+    <div class="toolbar">
+      <input type="search" id="q" placeholder="搜索模型名 / 厂商 / 用途关键词…">
+      <select id="fOpen"><option value="">开源 / 闭源</option><option value="1">仅开源</option><option value="0">仅闭源</option></select>
+      <select id="fVendor"><option value="">全部厂商</option></select>
+      <select id="fSort">
+        <option value="new">最新发布</option>
+        <option value="ctx">上下文最长</option>
+        <option value="cheapIn">输入最便宜</option>
+        <option value="cheapOut">输出最便宜</option>
+        <option value="name">名称</option>
+      </select>
+      <button class="chip" data-c="free">🆓 免费</button>
+      <button class="chip" data-c="reasoning">🧠 推理</button>
+      <button class="chip" data-c="vision">👁 视觉</button>
+      <button class="chip" data-c="tools">🔧 工具调用</button>
+      <button class="chip" data-c="open">🔓 开源</button>
+    </div>
+    <div class="mgrid" id="mgrid"></div>
+    <button class="btn more" id="more" style="display:none">显示更多 ↓</button>
+  </section>
+
+  <!-- ================= 客户端 ================= -->
+  <section class="page" id="p-client">
+    <div class="card" style="margin-bottom:14px"><div class="chd"><h3>🎯 什么场景用什么组合最好</h3><span class="hint">内置推荐</span></div>
+      <div class="cbody"><div class="combo" id="combo"></div></div></div>
+    <div class="card" style="margin-bottom:14px"><div class="chd"><h3>📊 客户端 × 模型 支持矩阵</h3><span class="hint">✅ 原生支持 · ✅A API直连 · 🔧 自定义接口可接 · ❌ 不支持</span></div>
+      <div class="cbody" style="overflow-x:auto" id="matrix"></div></div>
+    <div class="card"><div class="chd"><h3>🖥️ 客户端一览</h3><span class="hint">点击看详细说明</span></div>
+      <div class="cbody" id="clientList"></div></div>
+  </section>
+
+  <!-- ================= 趋势 ================= -->
+  <section class="page" id="p-trend">
+    <div class="card" style="margin-bottom:14px"><div class="chd"><h3>🚀 模型动向雷达</h3><span class="hint">从最新资讯标题自动聚类 · 点开看原文</span></div>
+      <div class="cbody" id="trendChips"></div></div>
+    <div class="grid g2">
+      <div class="card"><div class="chd"><h3>📰 最新资讯</h3><span class="hint">多源 RSS 聚合</span></div>
+        <div class="cbody" id="newsList"></div></div>
+      <div class="card"><div class="chd"><h3>🧪 最近冒头的开源模型</h3><span class="hint">热度榜里最近三周出现的</span></div>
+        <div class="cbody" id="hfNew"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px"><div class="chd"><h3>🏷️ 实验室仓库发布记录</h3><span class="hint">GitHub Releases</span></div>
+      <div class="cbody" id="ghRel"></div></div>
+  </section>
+
+  <!-- ================= 免费接口（合并自 AI 雷达 v2） ================= -->
+  <section class="page" id="p-free">
+    <div class="note" style="margin-bottom:14px">🛰️ 把 <b>OpenRouter 及其类似厂商</b> 的 API 网络接口地址常驻在这里，防止遗忘；下方实时展示各家<b>免费模型</b>。OpenRouter 免 Key 即可列免费模型，其余厂商需填入自己的 Key 才能调其 /models（接口已列出，去对应平台申请即可）。</div>
+
+    <h3 style="font-size:13px;color:var(--ink2);margin:4px 0 10px">① 网络接口速查（endpoint）</h3>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px;margin-bottom:18px" id="epGrid"></div>
+
+    <div class="toolbar">
+      <span class="chip on" data-fmode="vendor" style="cursor:pointer">按模型厂商</span>
+      <span class="chip" data-fmode="provider" style="cursor:pointer">按提供商</span>
+      <input type="search" id="fq" placeholder="搜索免费模型名 / 厂商 / 用途…">
+      <span class="hint" id="fCount" style="color:var(--ink3);font-size:11px"></span>
+    </div>
+    <div class="mgrid" id="fGrid"></div>
+    <button class="btn more" id="fMore" style="display:none">显示更多 ↓</button>
+  </section>
+
+  <!-- ================= 使用方案（本机定制） ================= -->
+  <section class="page" id="p-plan">
+    <div class="note" style="margin-bottom:14px">
+      🧭 这一页是<b>针对这台机器定制</b>的大模型使用方案：先分析本机实际跑过的任务，再结合<b>实时价格</b>动态算出每个任务该用谁、备胎是谁、一个月要花多少钱。<br>
+      价格来自 OpenRouter 实时接口，汇率也实时拉 —— <b>模型上榜赚钱明月更替时，结论会跟着变</b>，不用手动维护价格表。
+    </div>
+
+    <!-- 控制台 -->
+    <div class="card pl-ctl">
+      <div class="chd"><h3>🎛️ 决策偏好</h3><span class="hint">拖动后立即重算全表</span></div>
+      <div class="cbody">
+        <div class="pl-slider">
+          <span class="lab">省钱优先</span>
+          <input type="range" id="plW" min="0" max="100" value="45" step="5">
+          <span class="lab">能力优先</span>
+          <b id="plWv" class="val">45%</b>
+        </div>
+        <div class="pl-inputs">
+          <label>月度预算上限
+            <input type="number" id="plBudget" value="80" min="0" step="5" style="width:96px"> 元
+          </label>
+          <label>每月天数
+            <input type="number" id="plDays" value="30" min="1" max="31" style="width:72px"> 天
+          </label>
+          <label class="ck"><input type="checkbox" id="plCn"> 优先国产模型</label>
+          <label class="ck"><input type="checkbox" id="plNoFree" checked> 主力不用免费档（限速不稳定）</label>
+          <button class="chip" id="plReset">↺ 恢复默认</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ① 任务画像 -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="chd"><h3>① 本机任务画像</h3><span class="hint" id="plSrc"></span></div>
+      <div class="cbody">
+        <div class="pl-sum" id="plSum"></div>
+        <div class="pl-tasks" id="plTasks"></div>
+      </div>
+    </div>
+
+    <!-- ② 路由总表 -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="chd"><h3>② 路由总表（实时价格算出来的）</h3><span class="hint">点行看完整备选与理由</span></div>
+      <div class="cbody" id="plRoute"></div>
+    </div>
+
+    <!-- ③ 成本估算 -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="chd"><h3>③ 月度成本估算</h3><span class="hint">按上面的用量画像 × 实时单价计算</span></div>
+      <div class="cbody">
+        <div id="plCost"></div>
+      </div>
+    </div>
+
+    <!-- ④ fallback -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="chd"><h3>④ Fallback 兜底方案</h3><span class="hint">主模型挂了 / 超预算 / 断网时依次往下走</span></div>
+      <div class="cbody" id="plFb"></div>
+    </div>
+
+    <!-- ⑤ 提供商 -->
+    <div class="card">
+      <div class="chd"><h3>⑤ 提供商选择</h3><span class="hint">按你的画像给的建议，含接口地址</span></div>
+      <div class="cbody" id="plProv"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  数据源：OpenRouter（模型/价格）· Hugging Face 镜像（开源热度）· GitHub Releases · 多源 RSS。<br>
+  排行榜不含官方跑分 —— 本机网络访问不到 LMArena，点「官方能力跑分榜」里的按钮可在浏览器里直接打开。<br>
+  所有数据本地缓存于 <code>AILens/cache</code>，断网时自动使用上一次的缓存。
+</footer>
+
+<div class="mask" id="mask"></div>
+<div class="modal" id="modal"><div class="mhead"><div style="flex:1;min-width:0"><h2 id="mTitle"></h2><div class="id" id="mId"></div></div><button class="x" id="mClose">✕</button></div><div class="mbody" id="mBody"></div></div>
+
+<script>
+(function () {
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtDate = ts => { if (!ts) return '—'; const d = new Date(ts); return (d.getFullYear()) + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); };
+const fmtAgo = ms => { if (ms == null) return ''; const h = Math.round(ms/3600e3); if (h < 1) return '刚刚'; if (h < 48) return h + ' 小时前'; return Math.round(h/24) + ' 天前'; };
+const money = v => { if (v === 0) return '<span class="badge free">免费</span>'; const R = rateCny(); const c = v * R; return '<span style="white-space:nowrap">¥' + c.toFixed(c < 10 ? 2 : 1) + '<small style="color:var(--ink3);font-size:10px"> ($' + v.toFixed(v < 0.5 ? 2 : 1) + ')</small></span>'; };
+function rateCny() { return (DATA && DATA.rate && DATA.rate.usdCny) || 6.7; }
+
+/* ---------- 内置：模型梯队参考（定性、不含跑分） ---------- */
+const TIERS = [
+  { t: '旗舰闭源（能力第一梯队）', d: 'OpenAI GPT 系列、Anthropic Claude 系列、Google Gemini 系列、xAI Grok 系列。综合能力、代码、Agent 生态最成熟，价格也最高。最新版本去「模型库」按厂商筛。' },
+  { t: '开源旗舰（权重公开）', d: 'DeepSeek、阿里 Qwen、Meta Llama、月之暗面 Kimi K2、智谱 GLM、Mistral。可以本地部署、可以微调，性价比远高于闭源旗舰，中文场景表现好。' },
+  { t: '本地小钢炮（消费级显卡能跑）', d: 'Qwen 的小尺寸版、Llama 小尺寸、Gemma、Phi 系列、Mistral Small。7B~14B 级别在 8~16G 显存就能跑，适合隐私敏感和离线场景。' },
+  { t: '特定强项', d: '推理/数学：DeepSeek 推理版、带 reasoning 的模型；长文档：Gemini、Kimi；角色扮演：DeepSeek、Mistral 及社区微调版；多模态：Gemini、GPT、Qwen-VL。' }
+];
+$('#rank-tier').innerHTML = TIERS.map(t => '<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #f1f3f9"><span class="badge cap" style="align-self:flex-start;flex:none">'+esc(t.t)+'</span><div style="font-size:12px;color:var(--ink2);line-height:1.7">'+esc(t.d)+'</div></div>').join('');
+
+/* ---------- 状态 ---------- */
+let DATA = null, CLIENTS = null;
+const caps = new Set();
+let shown = 40;
+
+/* ---------- Tab 切换 ---------- */
+function selectTab(p) {
+  document.querySelectorAll('.tab').forEach(x => x.classList.toggle('on', x.dataset.p === p));
+  document.querySelectorAll('.page').forEach(pg => pg.classList.toggle('on', pg.id === 'p-' + p));
+}
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => selectTab(t.dataset.p));
+(function () {
+  const h = location.hash.replace('#', '');
+  if (h && document.querySelector('.tab[data-p="' + h + '"]')) selectTab(h);
+})();
+
+/* ---------- 拉取 ---------- */
+async function load(force) {
+  const btn = $('#refresh'); btn.disabled = true; btn.textContent = '拉取中…';
+  $('#meta').innerHTML = '<span class="spin"></span>正在更新数据…';
+  try {
+    const r = await fetch('/api/all' + (force ? '?refresh=1' : ''));
+    DATA = await r.json();
+  } catch (e) { DATA = { error: String(e) }; }
+  if (!CLIENTS) {
+    try { CLIENTS = await (await fetch('/api/clients')).json(); } catch (e) {}
+  }
+  if (!PLAN) {
+    try { PLAN = await (await fetch('/api/plan')).json(); } catch (e) {}
+  }
+  btn.disabled = false; btn.textContent = '↻ 刷新数据';
+  renderAll();
+}
+
+/* ---------- 顶部状态 ---------- */
+function renderMeta() {
+  const parts = [];
+  if (DATA && DATA.updated) {
+    const src = [];
+    if (DATA.models) src.push(DATA.models.ok ? '模型 ' + DATA.models.data.length + (DATA.models.stale ? '(缓存)' : '') : '模型✗');
+    if (DATA.hfTrend) src.push(DATA.hfTrend.ok ? '热度' : '热度✗');
+    if (DATA.news) src.push(DATA.news.ok ? '资讯' : '资讯✗');
+    if (DATA.rate && DATA.rate.ok) src.push('汇率 1$≈¥' + DATA.rate.usdCny.toFixed(2) + (DATA.rate.stale ? '(缓存)' : ''));
+    parts.push('<b>更新于 ' + fmtDate(DATA.updated) + '</b><br>' + esc(src.join(' · ')));
+  } else parts.push('数据不可用');
+  $('#meta').innerHTML = parts.join('');
+}
+
+/* ---------- 排行榜 ---------- */
+function renderRank() {
+  // 1. 开源热度榜
+  const hf = DATA && DATA.hfTrend && DATA.hfTrend.ok && Array.isArray(DATA.hfTrend.data) ? DATA.hfTrend.data : [];
+  $('#rank-hf').innerHTML = hf.length ? table(
+    ['排名','模型','下载','点赞','许可证'],
+    hf.slice(0,18).map((m,i) => '<tr class="click" data-hf="'+esc(m.modelId||m.id)+'"><td><span class="rk '+(i<3?['g','s','b'][i]:'')+'">'+(i+1)+'</span></td>'+
+      '<td><b style="font-size:12px">'+esc(m.modelId||m.id)+'</b></td>'+
+      '<td class="num">'+fmtN(m.downloads)+'</td><td class="num">'+fmtN(m.likes)+'</td>'+
+      '<td>'+(lic(m.tags)||'—')+'</td></tr>').join('')
+  ) : empty('热度数据不可用（可能是网络问题，点右上角刷新重试）');
+  if (DATA && DATA.hfTrend && DATA.hfTrend.stale) $('#rank-hf').insertAdjacentHTML('afterbegin','<div class="note" style="margin-bottom:8px">⚠️ 显示的是上次缓存的数据</div>');
+
+  // 2. 性价比榜
+  const ms = (DATA && DATA.models && DATA.models.ok) ? DATA.models.data : [];
+  const cheap = ms.filter(m => m.context >= 8192 && (m.priceIn1M + m.priceOut1M) > 0)
+    .sort((a,b) => (a.priceIn1M + a.priceOut1M) - (b.priceIn1M + b.priceOut1M)).slice(0,16);
+  $('#rank-price').innerHTML = cheap.length ? table(
+    ['排名','模型','上下文','输入 /1M','输出 /1M'],
+    cheap.map((m,i) => '<tr class="click" data-id="'+esc(m.id)+'"><td><span class="rk '+(i<3?['g','s','b'][i]:'')+'">'+(i+1)+'</span></td>'+
+      '<td><b style="font-size:12px">'+esc(m.name)+'</b><div style="font-size:10px;color:var(--ink3)">'+esc(m.vendor)+'</div></td>'+
+      '<td class="num">'+fmtCtx(m.context)+'</td><td class="num">'+money(m.priceIn1M)+'</td><td class="num">'+money(m.priceOut1M)+'</td></tr>').join('')
+  ) : empty('模型数据不可用');
+
+  // 3. 最新上线
+  const fresh = ms.slice().filter(m => m.created).sort((a,b) => b.created - a.created).slice(0,16);
+  $('#rank-new').innerHTML = fresh.length ? table(
+    ['发布','模型','厂商','上下文','开源'],
+    fresh.map(m => '<tr class="click" data-id="'+esc(m.id)+'"><td class="num">'+fmtDate(m.created)+'</td>'+
+      '<td><b style="font-size:12px">'+esc(m.name)+'</b></td><td class="num">'+esc(m.vendor)+'</td>'+
+      '<td class="num">'+fmtCtx(m.context)+'</td><td>'+(m.open===true?'<span class="badge open">开源</span>':m.open===false?'<span class="badge closed">闭源</span>':'<span class="badge unk">未知</span>')+'</td></tr>').join('')
+  ) : empty('模型数据不可用');
+
+  // 4. 官方跑分榜
+  $('#rank-official').innerHTML =
+    '<div class="note" style="margin-bottom:11px"><b>说明：</b>官方的模型能力排行榜（LMArena 等）本机网络访问不到，程序拿不到实时数据，<b>这里不放伪造的分数</b>。用下面的按钮在你自己的浏览器里打开看，如果浏览器配了代理就能正常显示。</div>' +
+    '<div style="display:flex;gap:9px;flex-wrap:wrap">' +
+      '<a class="btn" target="_blank" rel="noopener" href="https://lmarena.ai/leaderboard">LMArena（竞技场）↗</a>' +
+      '<a class="btn" target="_blank" rel="noopener" href="https://artificialanalysis.ai/">Artificial Analysis ↗</a>' +
+      '<a class="btn" target="_blank" rel="noopener" href="https://livebench.ai/">LiveBench ↗</a>' +
+      '<a class="btn" target="_blank" rel="noopener" href="https://hf-mirror.com/spaces">HF 榜单 Space ↗</a>' +
+    '</div>';
+}
+
+function renderTier(){}
+function fmtN(n){ return n == null ? '—' : n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'k' : String(n); }
+function lic(tags){ if(!tags) return '—'; const t = tags.find(x => String(x).startsWith('license:')); return t ? esc(String(t).replace('license:','')) : '—'; }
+function fmtCtx(c){ if(!c) return '—'; return c >= 1e6 ? (c/1e6).toFixed(1)+'M' : c >= 1e3 ? Math.round(c/1e3)+'k' : String(c); }
+function table(head, rows){ return '<div style="overflow-x:auto"><table><thead><tr>'+head.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows+'</tbody></table></div>'; }
+function empty(msg){ return '<div class="empty">'+esc(msg)+'</div>'; }
+
+/* ---------- 模型库 ---------- */
+function vendorOptions() {
+  const set = new Set((DATA.models && DATA.models.ok ? DATA.models.data : []).map(m => m.vendor));
+  $('#fVendor').innerHTML = '<option value="">全部厂商</option>' + [...set].sort().map(v => '<option>'+esc(v)+'</option>').join('');
+}
+
+function filtered() {
+  const ms = (DATA && DATA.models && DATA.models.ok) ? DATA.models.data : [];
+  const q = $('#q').value.trim().toLowerCase();
+  const fo = $('#fOpen').value, fv = $('#fVendor').value, sort = $('#fSort').value;
+  let r = ms.filter(m => {
+    if (fo !== '' && String(Number(m.open)) !== fo) return false;
+    if (fv && m.vendor !== fv) return false;
+    for (const c of caps) {
+      if (c === 'open') { if (m.open !== true) return false; }
+      else if (!m[c]) return false;
+    }
+    if (q) {
+      const hay = (m.name + ' ' + m.vendor + ' ' + m.id + ' ' + m.desc).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+  const cmp = {
+    new: (a,b) => (b.created||0) - (a.created||0),
+    ctx: (a,b) => (b.context||0) - (a.context||0),
+    cheapIn: (a,b) => (a.priceIn1M||0) - (b.priceIn1M||0),
+    cheapOut: (a,b) => (a.priceOut1M||0) - (b.priceOut1M||0),
+    name: (a,b) => a.name.localeCompare(b.name)
+  }[sort];
+  if (cmp) r.sort(cmp);
+  return r;
+}
+
+function renderModels() {
+  const list = filtered();
+  const vis = list.slice(0, shown);
+  $('#mgrid').innerHTML = vis.length ? vis.map(cardHTML).join('')
+    : '<div class="empty" style="grid-column:1/-1">没有匹配的模型，换个筛选条件试试</div>';
+  const more = $('#more');
+  more.style.display = list.length > shown ? '' : 'none';
+  more.textContent = '显示更多（还有 ' + (list.length - shown) + ' 个）';
+}
+
+function cardHTML(m) {
+  const badges = [];
+  badges.push(m.open === true ? '<span class="badge open">🔓 开源</span>' : m.open === false ? '<span class="badge closed">🔒 闭源</span>' : '<span class="badge unk">来源未知</span>');
+  if (m.free) badges.push('<span class="badge free">🆓 免费</span>');
+  if (m.reasoning) badges.push('<span class="badge cap">🧠 推理</span>');
+  if (m.vision) badges.push('<span class="badge cap">👁 视觉</span>');
+  if (m.tools) badges.push('<span class="badge cap">🔧 工具</span>');
+  if (m.audio) badges.push('<span class="badge cap">🔊 音频</span>');
+  return '<div class="mcard" data-id="'+esc(m.id)+'">' +
+    '<div class="top"><div style="flex:1;min-width:0"><div class="nm">'+esc(m.name)+'</div><div class="vd">'+esc(m.vendor)+' · '+esc(m.id)+'</div></div></div>' +
+    '<div class="row">'+badges.join('')+'</div>' +
+    '<div class="kv"><span>上下文 <b>'+fmtCtx(m.context)+'</b></span>' +
+      '<span>输入 <b>'+(m.free?'免费':'¥'+(m.priceIn1M*rateCny()).toFixed(2))+'</b>/1M</span>' +
+      '<span>输出 <b>'+(m.free?'免费':'¥'+(m.priceOut1M*rateCny()).toFixed(2))+'</b>/1M</span>' +
+      '<span>'+fmtDate(m.created)+'</span></div>' +
+    '</div>';
+}
+
+/* ---------- 详情弹窗 ---------- */
+function openModel(id) {
+  const m = (DATA.models && DATA.models.ok ? DATA.models.data : []).find(x => x.id === id);
+  if (!m) return;
+  $('#mTitle').innerHTML = esc(m.name);
+  $('#mId').textContent = m.id + (m.hf ? '  ·  HF: ' + m.hf : '');
+  const badges = [];
+  badges.push(m.open === true ? '<span class="badge open">🔓 开源（权重公开，可本地部署）</span>' : m.open === false ? '<span class="badge closed">🔒 闭源（只能走 API）</span>' : '<span class="badge unk">来源未知</span>');
+  if (m.free) badges.push('<span class="badge free">🆓 免费调用</span>');
+  if (m.reasoning) badges.push('<span class="badge cap">🧠 支持推理模式</span>');
+  if (m.tools) badges.push('<span class="badge cap">🔧 支持工具调用</span>');
+  if (m.vision) badges.push('<span class="badge cap">👁 能看图</span>');
+  if (m.audio) badges.push('<span class="badge cap">🔊 能听音频</span>');
+  if (m.image_out) badges.push('<span class="badge cap">🎨 能生图</span>');
+
+  const mod = m.input_modalities && m.input_modalities.length ? m.input_modalities.join(' / ') : '文本';
+
+  let html = '<div class="sect"><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">'+badges.join('')+'</div>';
+  html += '<div class="kvgrid">' +
+    '<div class="kvbox"><div class="k">上下文窗口</div><div class="v">'+fmtCtx(m.context)+' <small>tokens</small></div></div>' +
+    '<div class="kvbox"><div class="k">输入价格</div><div class="v">'+(m.free?'免费':money(m.priceIn1M))+' <small>/ 1M tokens</small></div></div>' +
+    '<div class="kvbox"><div class="k">输出价格</div><div class="v">'+(m.free?'免费':money(m.priceOut1M))+' <small>/ 1M tokens</small></div></div>' +
+    '<div class="kvbox"><div class="k">发布时间</div><div class="v" style="font-size:12px">'+fmtDate(m.created)+'</div></div>' +
+    '<div class="kvbox"><div class="k">知识截止</div><div class="v" style="font-size:12px">'+esc(m.knowledge||'未标注')+'</div></div>' +
+    '<div class="kvbox"><div class="k">输入模态</div><div class="v" style="font-size:12px">'+esc(mod)+'</div></div>' +
+  '</div></div>';
+
+  const st = STRENGTHS[m.vendorKey];
+  html += '<div class="sect"><h4>擅长什么</h4><div class="desc">' +
+    (st ? '<div style="margin-bottom:10px">'+st.map(s=>'<span class="badge cap" style="margin:0 5px 5px 0">'+esc(s)+'</span>').join('')+'</div>' : '') +
+    (m.desc ? esc(m.desc).replace(/\n/g,'<br>') : '<span style="color:var(--ink3)">官方没有给这段模型的说明。</span>') + '</div></div>';
+
+  const recs = recommendClients(m);
+  html += '<div class="sect"><h4>推荐搭配的客户端</h4><div class="recbox">' +
+    recs.map(r => '<div class="rec"><b>'+esc(r.n)+'</b><span>'+esc(r.why)+'</span></div>').join('') + '</div></div>';
+
+  if (m.params && m.params.length) {
+    html += '<div class="sect"><h4>支持的可调参数</h4><div style="display:flex;gap:5px;flex-wrap:wrap">' +
+      m.params.map(p => '<span class="badge">'+esc(p)+'</span>').join('') + '</div></div>';
+  }
+  html += '<div class="sect"><h4>去哪用（官方 / API / 权重）</h4>' + acquireHTML(m) + '</div>';
+
+  $('#mBody').innerHTML = html;
+  $('#mask').classList.add('on'); $('#modal').classList.add('on');
+}
+
+/* ---------- HF 热度榜模型详情（优先匹配到 OpenRouter 同款，否则用 HF 数据展示） ---------- */
+function openHf(hfId) {
+  const ms = (DATA.models && DATA.models.ok) ? DATA.models.data : [];
+  const or = ms.find(x => x.hf === hfId)
+    || ms.find(x => x.id.toLowerCase() === hfId.toLowerCase())
+    || ms.find(x => { const a = hfId.toLowerCase().split('/'), b = x.id.toLowerCase().split('/'); return a.length > 1 && b.length > 1 && a[a.length-1] === b[b.length-1]; });
+  if (or) { openModel(or.id); return; }
+
+  const items = [];
+  if (DATA.hfTrend && DATA.hfTrend.ok && Array.isArray(DATA.hfTrend.data)) items.push(...DATA.hfTrend.data);
+  if (DATA.hfNew && DATA.hfNew.ok && Array.isArray(DATA.hfNew.data)) items.push(...DATA.hfNew.data);
+  const h = items.find(x => (x.modelId || x.id) === hfId) || {};
+
+  $('#mTitle').innerHTML = esc(hfId);
+  $('#mId').textContent = 'Hugging Face 开源模型（权重公开）';
+  const tags = (h.tags || []).filter(t => !String(t).startsWith('license:')).slice(0, 14);
+  const mod = h.pipeline_tag ? esc(h.pipeline_tag) : '未标注';
+
+  let html = '<div class="sect"><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">' +
+    '<span class="badge open">🔓 开源（权重公开，可本地部署）</span>' +
+    (h.private ? '<span class="badge warn">非公开仓库</span>' : '') + '</div>';
+  html += '<div class="kvgrid">' +
+    '<div class="kvbox"><div class="k">累计下载</div><div class="v">'+fmtN(h.downloads)+'</div></div>' +
+    '<div class="kvbox"><div class="k">点赞</div><div class="v">'+fmtN(h.likes)+'</div></div>' +
+    '<div class="kvbox"><div class="k">任务类型</div><div class="v" style="font-size:12px">'+mod+'</div></div>' +
+    '<div class="kvbox"><div class="k">创建时间</div><div class="v" style="font-size:12px">'+fmtDate(h.createdAt?Date.parse(h.createdAt):null)+'</div></div>' +
+    '<div class="kvbox"><div class="k">最近更新</div><div class="v" style="font-size:12px">'+fmtDate(h.lastModified?Date.parse(h.lastModified):null)+'</div></div>' +
+    '<div class="kvbox"><div class="k">许可证</div><div class="v" style="font-size:12px">'+(lic(h.tags)||'未标注')+'</div></div>' +
+  '</div></div>';
+
+  html += '<div class="sect"><h4>价格怎么算</h4><div class="desc">这个模型在 Hugging Face 上开源：<b>权重本身免费</b>，可以下载到本地跑（不花钱），也可以在第三方平台按 token 付费调用。' +
+    '它不在 OpenRouter 的模型列表里（或还没同步），所以这里没有标每百万 token 的报价。想看报价可以在 OpenRouter 搜模型名。</div></div>';
+
+  if (tags.length) {
+    html += '<div class="sect"><h4>标签</h4><div style="display:flex;gap:5px;flex-wrap:wrap">' +
+      tags.map(t => '<span class="badge">'+esc(t)+'</span>').join('') + '</div></div>';
+  }
+
+  const recs = recommendClients({ open: true, vendorKey: hfId.split('/')[0] });
+  html += '<div class="sect"><h4>推荐用法</h4><div class="recbox">' +
+    recs.map(r => '<div class="rec"><b>'+esc(r.n)+'</b><span>'+esc(r.why)+'</span></div>').join('') + '</div></div>';
+
+  html += '<div class="sect"><h4>去哪用</h4><div style="display:flex;gap:8px;flex-wrap:wrap">' +
+    '<a class="btn" target="_blank" rel="noopener" href="https://hf-mirror.com/'+esc(hfId)+'">Hugging Face 权重页 ↗</a>' +
+    '<a class="btn" target="_blank" rel="noopener" href="https://openrouter.ai/models?search='+encodeURIComponent(hfId.split('/')[1] || hfId)+'">OpenRouter 搜同款 ↗</a>' +
+    '</div></div>';
+
+  $('#mBody').innerHTML = html;
+  $('#mask').classList.add('on'); $('#modal').classList.add('on');
+}
+
+const STRENGTHS = {
+  'openai': ['综合能力第一梯队','工具链和生态最全','代码 / Agent 成熟'],
+  'anthropic': ['长文写作与代码修改口碑好','MCP 工具生态','指令遵循稳'],
+  'google': ['超长上下文','多模态（图/音/视频）','和谷歌全家桶联动'],
+  'x-ai': ['能接 X 平台实时信息','推理模式','性格直'],
+  'meta-llama': ['开源生态最广','微调资料最多','社区支持好'],
+  'deepseek': ['数学和代码推理强','中文写作好','性价比高'],
+  'qwen': ['中文综合能力强','尺寸选择多','开源生态全'],
+  'moonshotai': ['长文本处理','Agentic 任务'],
+  'z-ai': ['中文与代码','开源权重','国内可用'],
+  'zai-org': ['中文与代码','开源权重'],
+  'thudm': ['中文与代码','开源权重'],
+  'mistralai': ['开源权重选择多','小模型效率高'],
+  'minimax': ['超长上下文','Agent 场景'],
+  'nvidia': ['开源权重','推理优化好'],
+  'microsoft': ['小模型效率（Phi 系列）','学术基准扎实'],
+  'perplexity': ['自带联网搜索'],
+  'cohere': ['企业检索 / RAG'],
+  'amazon': ['AWS 集成'],
+  'baidu': ['中文场景'],
+  'bytedance': ['中文场景','火山引擎生态'],
+  'stepfun': ['多模态','中文场景']
+};
+
+/* 各厂商官方获取入口（网页 / App / 开放平台） */
+const ACQUIRE = {
+  'openai': [{label:'ChatGPT 官方', url:'https://chatgpt.com/'}],
+  'anthropic': [{label:'Claude 官方', url:'https://claude.ai/'}],
+  'google': [{label:'Gemini 官方', url:'https://gemini.google.com/'}],
+  'x-ai': [{label:'Grok', url:'https://x.com/grok'}],
+  'meta-llama': [{label:'Llama 官网', url:'https://www.llama.com/'}],
+  'mistralai': [{label:'Mistral', url:'https://mistral.ai/'}],
+  'deepseek': [{label:'DeepSeek 官方', url:'https://chat.deepseek.com/'}],
+  'deepseek-ai': [{label:'DeepSeek 官方', url:'https://chat.deepseek.com/'}],
+  'qwen': [{label:'通义千问', url:'https://tongyi.aliyun.com/'}],
+  'moonshotai': [{label:'Kimi', url:'https://kimi.moonshot.cn/'}],
+  'z-ai': [{label:'智谱清言', url:'https://chat.z.ai/'}],
+  'zai-org': [{label:'智谱清言', url:'https://chat.z.ai/'}],
+  'thudm': [{label:'智谱清言', url:'https://chat.z.ai/'}],
+  'minimax': [{label:'MiniMax', url:'https://www.minimax.io/'}],
+  'bytedance': [{label:'豆包', url:'https://www.doubao.com/'}],
+  'baidu': [{label:'文心一言', url:'https://yiyan.baidu.com/'}],
+  'stepfun': [{label:'阶跃', url:'https://www.stepfun.com/'}],
+  '01-ai': [{label:'零一万物', url:'https://www.01.ai/'}],
+  'internlm': [{label:'书生·浦语', url:'https://internlm.intern-ai.org.cn/'}]
+};
+
+/* 各厂商的 API 开放平台 —— 拿 API Key 的地方，大多有免费额度 */
+const API_SITE = {
+  'deepseek': {label:'DeepSeek 开放平台', short:'DeepSeek API', url:'https://platform.deepseek.com/'},
+  'deepseek-ai': {label:'DeepSeek 开放平台', short:'DeepSeek API', url:'https://platform.deepseek.com/'},
+  'qwen': {label:'阿里云百炼（有免费额度）', short:'百炼 API', url:'https://bailian.console.aliyun.com/'},
+  'moonshotai': {label:'Moonshot 开放平台', short:'Moonshot API', url:'https://platform.moonshot.cn/'},
+  'z-ai': {label:'智谱开放平台 BigModel（有免费模型）', short:'BigModel', url:'https://bigmodel.cn/'},
+  'zai-org': {label:'智谱开放平台 BigModel（有免费模型）', short:'BigModel', url:'https://bigmodel.cn/'},
+  'thudm': {label:'智谱开放平台 BigModel（有免费模型）', short:'BigModel', url:'https://bigmodel.cn/'},
+  'minimax': {label:'MiniMax 开放平台', short:'MiniMax API', url:'https://platform.minimaxi.com/'},
+  'bytedance': {label:'火山方舟', short:'火山方舟', url:'https://console.volcengine.com/ark'},
+  'baidu': {label:'百度千帆', short:'千帆 API', url:'https://console.bce.baidu.com/qianfan'},
+  'stepfun': {label:'阶跃开放平台', short:'阶跃 API', url:'https://platform.stepfun.com/'},
+  '01-ai': {label:'零一万物开放平台', short:'零一 API', url:'https://platform.01.ai/'},
+  'internlm': {label:'InternLM 开放平台', short:'InternLM API', url:'https://internlm.intern-ai.org.cn/'},
+  'openai': {label:'OpenAI Platform', short:'OpenAI API', url:'https://platform.openai.com/'},
+  'anthropic': {label:'Anthropic Console', short:'Anthropic API', url:'https://console.anthropic.com/'},
+  'google': {label:'Google AI Studio（免费额度大）', short:'AI Studio', url:'https://aistudio.google.com/'},
+  'x-ai': {label:'xAI Console', short:'xAI API', url:'https://console.x.ai/'},
+  'mistralai': {label:'Mistral Console', short:'Mistral API', url:'https://console.mistral.ai/'}
+};
+
+/* 通用免费 API 接口提供商（点击直达） */
+const FREE_API = [
+  {n:'硅基流动 SiliconFlow', url:'https://siliconflow.cn/', why:'国内最省事：注册送额度，Qwen / DeepSeek / GLM 等开源模型有免费额度，OpenAI 兼容接口，一个 Key 通吃。'},
+  {n:'OpenRouter · 免费模型', url:'https://openrouter.ai/models?max_price=0', why:'价格筛 0 就是免费模型（带 :free 后缀，有速率限制），一个 Key 调 400+ 模型。'},
+  {n:'魔搭 ModelScope', url:'https://modelscope.cn/', why:'阿里开源模型社区，提供免费 API 体验和免费 Notebook 算力。'},
+  {n:'GitHub Models', url:'https://github.com/marketplace/models', why:'有 GitHub 账号就能免费调用多家模型，适合学习和做原型。'},
+  {n:'Google AI Studio', url:'https://aistudio.google.com/', why:'Gemini API 免费额度大，拿 Key 最快，长上下文白嫖首选。'},
+  {n:'Groq', url:'https://console.groq.com/', why:'开源模型推理速度极快，免费额度充足。'},
+  {n:'Hugging Face Inference', url:'https://huggingface.co/inference-api', why:'开源模型托管与推理 API，有免费层。'}
+];
+function acquireLinks(m) {
+  const out = [];
+  (ACQUIRE[m.vendorKey] || []).forEach(o => out.push(o));
+  const api = API_SITE[m.vendorKey];
+  if (api) out.push(api);
+  if (m.hf) out.push({ label:'Hugging Face 权重', short:'HF 权重', url:'https://hf-mirror.com/' + m.hf });
+  out.push({ label:'OpenRouter API', short:'OpenRouter', url:'https://openrouter.ai/' + m.id });
+  return out;
+}
+function acquireHTML(m, compact) {
+  const links = acquireLinks(m);
+  const txt = o => compact ? (o.short || o.label) : o.label;
+  if (compact) {
+    return links.map(o => '<a class="badge cap" style="text-decoration:none" target="_blank" rel="noopener" href="' + esc(o.url) + '" title="' + esc(o.label) + '">' + esc(txt(o)) + ' ↗</a>').join(' ');
+  }
+  return '<div style="display:flex;gap:8px;flex-wrap:wrap">' + links.map(o =>
+    '<a class="btn" target="_blank" rel="noopener" href="' + esc(o.url) + '">' + esc(txt(o)) + ' ↗</a>').join('') + '</div>';
+}
+
+function recommendClients(m) {
+  const r = [];
+  if (m.vendorKey === 'openai') r.push({n:'ChatGPT 官方', why:'原生支持全部功能：语音、图像、Agent、Canvas。'});
+  if (m.vendorKey === 'anthropic') r.push({n:'Claude Desktop', why:'原生支持，MCP 工具生态最好，还能跑 Claude Code。'});
+  if (m.vendorKey === 'google') r.push({n:'Gemini 官方', why:'原生支持，长上下文和多模态体验最完整。'});
+  if (m.vendorKey === 'deepseek') r.push({n:'DeepSeek 官方 App', why:'免费、免配置，网页版直接用。'});
+  if (m.open === true) {
+    r.push({n:'LM Studio / Ollama', why:'开源权重可以下载到本地跑，不花钱、不上网、不吃 API 额度。'});
+    r.push({n:'Open WebUI', why:'本地部署的网页界面，配 Ollama 最顺。'});
+  }
+  r.push({n:'Cherry Studio / Chatbox', why:'填一个 API Key（OpenRouter 或官方）就能用，多模型随时切。'});
+  if (m.vendorKey !== 'openai' && m.vendorKey !== 'anthropic') r.push({n:'OpenRouter', why:'这个模型在 OpenRouter 上有，一个 Key 能调 400+ 模型，还有免费额度。'});
+  if (m.vendorKey === 'deepseek' || m.vendorKey === 'mistralai' || m.vendorKey === 'qwen') r.push({n:'SillyTavern', why:'角色扮演场景口碑好，支持自定义 API。'});
+  return r.slice(0, 4);
+}
+
+/* ---------- 客户端页 ---------- */
+function renderClients() {
+  if (!CLIENTS) return;
+  $('#combo').innerHTML = CLIENTS.combo.map(c =>
+    '<div class="cc"><span class="tag">'+esc(c.tag)+'</span><b>'+esc(c.title)+'</b><p>'+esc(c.why)+'</p></div>').join('');
+
+  const fams = CLIENTS.fams, cs = CLIENTS.clients;
+  $('#matrix').innerHTML = '<table><thead><tr><th style="min-width:170px">客户端</th>' +
+    fams.map(f => '<th>'+esc(f)+'</th>').join('') + '</tr></thead><tbody>' +
+    cs.map(c => '<tr><td><b style="font-size:12px">'+esc(c.icon+' '+c.n)+'</b></td>' +
+      c.row.map(cell => {
+        const s = cell === '✅' ? '<span class="badge open">✅ 原生</span>'
+              : cell === '✅A' ? '<span class="badge cap">✅ API</span>'
+              : cell === '🔧' ? '<span class="badge warn">🔧 可接</span>'
+              : '<span class="badge" style="color:var(--ink3)">❌</span>';
+        return '<td>'+s+'</td>';
+      }).join('') + '</tr>').join('') + '</tbody></table>';
+
+  $('#clientList').innerHTML = '<div class="grid g2">' + cs.map((c,i) =>
+    '<div class="cc" style="cursor:pointer" data-ci="'+i+'"><span class="tag">'+esc(c.type)+'</span>' +
+    '<b>'+esc(c.icon+' '+c.n)+'</b>' +
+    '<p><b style="display:inline;font-size:11.5px">平台：</b>'+esc(c.plat)+'<br>' +
+    '<b style="display:inline;font-size:11.5px">费用：</b>'+esc(c.pay)+'<br>' +
+    '<b style="display:inline;font-size:11.5px">适合：</b>'+esc(c.best)+'<br>' +
+    '<span style="color:var(--ink3)">'+esc(c.tip)+'</span></p></div>').join('') + '</div>';
+
+  $('#clientList').addEventListener('click', e => {
+    const el = e.target.closest('[data-ci]');
+    if (!el) return;
+    const c = CLIENTS.clients[Number(el.dataset.ci)];
+    $('#mTitle').innerHTML = esc(c.icon + ' ' + c.n);
+    $('#mId').textContent = c.type;
+    $('#mBody').innerHTML = '<div class="kvgrid">' +
+      '<div class="kvbox"><div class="k">平台</div><div class="v" style="font-size:12px">'+esc(c.plat)+'</div></div>' +
+      '<div class="kvbox"><div class="k">费用</div><div class="v" style="font-size:12px">'+esc(c.pay)+'</div></div>' +
+      '</div><div class="sect" style="margin-top:16px"><h4>适合什么场景</h4><div class="desc">'+esc(c.best)+'</div></div>' +
+      '<div class="sect"><h4>模型支持</h4><div style="display:flex;gap:5px;flex-wrap:wrap">' +
+      c.row.map((cell,i) => cell === '❌' ? '' : '<span class="badge '+(cell==='✅'?'open':cell==='✅A'?'cap':'warn')+'">'+esc(CLIENTS.fams[i])+' · '+esc(cell==='✅'?'原生':cell==='✅A'?'API直连':'自定义接口')+'</span>').join('') +
+      '</div></div>' +
+      '<div class="sect"><h4>一句话点评</h4><div class="desc">'+esc(c.tip)+'</div></div>';
+    $('#mask').classList.add('on'); $('#modal').classList.add('on');
+  });
+}
+
+/* ---------- 趋势页 ---------- */
+function renderTrend() {
+  const up = (DATA && DATA.news && DATA.news.upcoming) || [];
+  $('#trendChips').innerHTML = up.length ?
+    '<div class="note" style="margin-bottom:11px">按<b>模型家族</b>统计最近资讯里的提及量，排前面 = 最近动作多。带 <span class="badge warn">🚨 发布信号</span> 表示相关新闻里出现了 launch / release / preview / announce 这类词。<b>这只是资讯热度推断，不代表官方已发布</b>；点开看原文。</div>' +
+    '<div class="trchips">' + up.map((u,i) =>
+      '<div class="tc" data-ti="'+i+'"><b>'+esc(u.model)+'</b><i>'+u.hits.length+' 条'+(u.signal?' <span class="badge warn">🚨</span>':'')+'</i></div>').join('') + '</div>'
+    : empty('暂时没识别到模型动向');
+  $('#trendChips').querySelectorAll('[data-ti]').forEach(el => el.onclick = () => {
+    const u = up[Number(el.dataset.ti)];
+    $('#mTitle').innerHTML = esc(u.model) + ' · 相关报道';
+    $('#mId').textContent = '从资讯标题自动匹配，仅供参考';
+    $('#mBody').innerHTML = '<div class="news">' + u.hits.map(h =>
+      '<a class="ni" href="'+esc(h.link)+'" target="_blank" rel="noopener"><span class="d">'+fmtDate(h.date)+'</span><span class="t">'+esc(h.title)+'</span><span class="s">'+esc(h.src)+'</span></a>').join('') + '</div>';
+    $('#mask').classList.add('on'); $('#modal').classList.add('on');
+  });
+
+  const items = (DATA && DATA.news && DATA.news.items) || [];
+  $('#newsList').innerHTML = items.length ?
+    '<div class="news">' + items.slice(0,28).map(it =>
+      '<a class="ni" href="'+esc(it.link)+'" target="_blank" rel="noopener"><span class="d">'+fmtDate(it.date)+'</span><span class="t">'+esc(it.title)+'</span><span class="s">'+esc(it.src)+'</span></a>').join('') + '</div>'
+    : empty('资讯拉取失败，点右上角刷新重试');
+
+  const hn = (DATA && DATA.hfNew && DATA.hfNew.ok && Array.isArray(DATA.hfNew.data)) ? DATA.hfNew.data : [];
+  $('#hfNew').innerHTML = hn.length ? table(['发布','模型','下载','许可证'],
+    hn.slice(0,18).map(m => '<tr class="click" data-hf="'+esc(m.modelId||m.id)+'"><td class="num">'+fmtDate(m.createdAt?Date.parse(m.createdAt):null)+'</td>'+
+      '<td><b style="font-size:12px">'+esc(m.modelId||m.id)+'</b><div style="font-size:10px;color:var(--ink3)">'+esc((m.pipeline_tag||''))+'</div></td>'+
+      '<td class="num">'+fmtN(m.downloads)+'</td><td>'+(lic(m.tags)||'—')+'</td></tr>').join(''))
+    : empty('开源新模型数据不可用');
+
+  const rel = (DATA && DATA.releases && DATA.releases.items) || [];
+  $('#ghRel').innerHTML = rel.length ? table(['日期','仓库','版本','说明'],
+    rel.map(x => '<tr><td class="num">'+fmtDate(x.date)+'</td><td><b style="font-size:12px">'+esc(x.repo)+'</b></td>'+
+      '<td><a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.tag)+'</a></td>'+
+      '<td style="font-size:11.5px;color:var(--ink2);max-width:340px">'+esc((x.name||'').slice(0,70))+'</td></tr>').join(''))
+    : empty('没有拿到仓库发布记录');
+}
+
+/* ---------- 国产模型对比 ---------- */
+const CN_KEYS = new Set(['deepseek','deepseek-ai','qwen','moonshotai','z-ai','zai-org','thudm','minimax','baidu','bytedance','stepfun','01-ai','internlm']);
+const CN_NAME = { '01-ai':'零一万物', 'internlm':'上海AI Lab InternLM', 'deepseek-ai':'DeepSeek' };
+function isCn(m){ return CN_KEYS.has(m.vendorKey); }
+function cnVendorName(m){ return CN_NAME[m.vendorKey] || m.vendor; }
+const cnCaps = new Set();
+let cnShown = 40;
+
+function capBadges(m) {
+  const b = [];
+  if (m.reasoning) b.push('<span class="badge cap">🧠</span>');
+  if (m.vision) b.push('<span class="badge cap">👁</span>');
+  if (m.tools) b.push('<span class="badge cap">🔧</span>');
+  if (m.audio) b.push('<span class="badge cap">🔊</span>');
+  if (m.image_out) b.push('<span class="badge cap">🎨</span>');
+  return b.join('') || '<span style="color:var(--ink3)">—</span>';
+}
+
+function renderCn() {
+  const all = (DATA && DATA.models && DATA.models.ok) ? DATA.models.data.filter(isCn) : [];
+  // 厂商下拉（保留当前选择）
+  const prevV = $('#cnVendor').value;
+  const vset = [...new Set(all.map(m => m.vendorKey))].sort((a,b) => cnVendorName(all.find(m=>m.vendorKey===a)).localeCompare(cnVendorName(all.find(m=>m.vendorKey===b)),'zh'));
+  $('#cnVendor').innerHTML = '<option value="">全部国产厂商</option>' + vset.map(k => '<option value="'+esc(k)+'">'+esc(cnVendorName(all.find(m=>m.vendorKey===k)))+'</option>').join('');
+  $('#cnVendor').value = prevV;
+
+  const fv = $('#cnVendor').value, sort = $('#cnSort').value;
+  let list = all.filter(m => {
+    if (fv && m.vendorKey !== fv) return false;
+    for (const c of cnCaps) if (!m[c]) return false;
+    return true;
+  });
+  const cmp = {
+    cheap: (a,b) => (a.priceIn1M + a.priceOut1M) - (b.priceIn1M + b.priceOut1M),
+    ctx: (a,b) => (b.context||0) - (a.context||0),
+    new: (a,b) => (b.created||0) - (a.created||0),
+    name: (a,b) => a.name.localeCompare(b.name,'zh')
+  }[sort];
+  if (cmp) list.sort(cmp);
+  const vis = list.slice(0, cnShown);
+
+  $('#cnTable').innerHTML = vis.length ? table(
+    ['厂商','模型','上下文','输入 /1M','输出 /1M','开源','能力','获取方式'],
+    vis.map(m => '<tr class="click" data-id="'+esc(m.id)+'"><td><b style="font-size:12px">'+esc(cnVendorName(m))+'</b></td>'+
+      '<td><b style="font-size:12px">'+esc(m.name)+'</b></td>'+
+      '<td class="num">'+fmtCtx(m.context)+'</td>'+
+      '<td class="num">'+money(m.priceIn1M)+'</td>'+
+      '<td class="num">'+money(m.priceOut1M)+'</td>'+
+      '<td>'+(m.open===true?'<span class="badge open">开源</span>':m.open===false?'<span class="badge closed">闭源</span>':'<span class="badge unk">未知</span>')+'</td>'+
+      '<td>'+capBadges(m)+'</td>'+
+      '<td>'+acquireHTML(m, true)+'</td></tr>').join('')
+  ) : empty('没有匹配的国产模型，换个筛选条件试试（或点右上角刷新数据）');
+
+  // 厂商速览（始终基于全部国产模型，不受筛选影响）
+  const groups = {};
+  all.forEach(m => { (groups[m.vendorKey] = groups[m.vendorKey] || []).push(m); });
+  const cards = Object.entries(groups).sort((a,b)=>cnVendorName(a[1][0]).localeCompare(cnVendorName(b[1][0]),'zh')).map(([k, arr]) => {
+    const openCnt = arr.filter(m => m.open === true).length;
+    const rep = arr.slice().sort((a,b) => (b.context||0) - (a.context||0))[0];
+    const st = STRENGTHS[k];
+    const pos = st ? st.slice(0,2).join('、') : '';
+    const site = (ACQUIRE[k] || [])[0], api = API_SITE[k];
+    return '<div class="cc" style="cursor:pointer" data-cnk="'+esc(k)+'"><span class="tag">'+esc(cnVendorName(arr[0]))+'</span>'+
+      '<b style="font-size:12.5px">'+arr.length+' 个模型'+(openCnt?' · '+openCnt+' 开源':'')+'</b>'+
+      '<p>主力：<b style="display:inline;font-size:11.5px">'+esc(rep.name)+'</b>（'+fmtCtx(rep.context)+' 上下文）<br>'+
+      (pos ? '<span style="color:var(--ink3)">'+esc(pos)+'</span>' : '<span style="color:var(--ink3)">来自 OpenRouter</span>')+'</p>'+
+      '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+      (site ? '<a class="badge cap" style="text-decoration:none" target="_blank" rel="noopener" href="'+esc(site.url)+'" title="'+esc(site.url)+'">🌐 '+esc(site.label)+' ↗</a>' : '') +
+      (api ? '<a class="badge cap" style="text-decoration:none" target="_blank" rel="noopener" href="'+esc(api.url)+'" title="'+esc(api.url)+'">🔌 '+esc(api.label)+' ↗</a>' : '') +
+      '</div></div>';
+  });
+  $('#cnVendorCards').innerHTML = cards.length ? '<div class="combo">'+cards.join('')+'</div>' : empty('暂无国产模型数据');
+
+  // 免费 API 接口提供商（静态清单，点击直达）
+  $('#cnFreeApi').innerHTML =
+    '<div class="note" style="margin-bottom:11px">下面是<b>能拿到免费 API Key 的平台</b>：注册后一般有免费额度或免费模型，接口大多是 OpenAI 兼容格式，可以直接填进 Cherry Studio / Chatbox / Cursor 等客户端。<b>免费额度会变，以官网为准。</b></div>' +
+    '<div class="combo">' + FREE_API.map(f =>
+      '<div class="cc"><a class="tag" style="text-decoration:none" target="_blank" rel="noopener" href="'+esc(f.url)+'">'+esc(f.n)+' ↗</a>' +
+      '<b style="font-size:12.5px"><a target="_blank" rel="noopener" href="'+esc(f.url)+'" style="color:var(--ink)">'+esc(f.url.replace(/^https?:\/\//,''))+'</a></b>' +
+      '<p>'+esc(f.why)+'</p></div>').join('') + '</div>';
+
+  const more = $('#cnMore');
+  if (more) { more.style.display = list.length > cnShown ? '' : 'none'; more.textContent = '显示更多（还有 ' + (list.length - cnShown) + ' 个）'; }
+}
+
+/* ==================================================================
+   使用方案页（本机定制 · 动态价格驱动）
+   思路：本机任务画像给出「能力需求向量 + 用量画像」，再拿 OpenRouter
+   实时拉到的价格和能力字段算分排序 —— 厂商一改价，结论自动跟着变。
+   ================================================================== */
+let PLAN = null;
+const planOpts = { w: 0.45, budget: 80, days: 30, cnFirst: false, noFree: true, focus: 'agent' };
+
+const DEPRECATED = /(deprecated|legacy|-old\b|discontinued|:batch)/i;
+/* 档位打分（启发式：本机拿不到跑分，只能从命名与厂商推断，页面已明确标注）
+   ⚠️ 顺序不能反：判断要「先看降级后缀、再看系列名」。
+   否则 z-ai/glm-5.3-flashx 会被系列名里的 "glm-5" 判成旗舰，而它其实是 Flash 档。 */
+const HEAVY = /(\bopus|\bultra|[-_]max\b|gpt-5|deepseek-v[34]-pro|hy4|kimi-k\d|qwen3\.8-max|gemini-.*-pro)/i;
+const MID   = /(\bpro\b|\bsonnet\b|\bplus\b|\bthinking\b|\bglm-5\b|\bdeepseek-pro\b)/i;
+const LIGHT = /(flas\w*|\blite\b|\bmini\b|\bair\b|\bnano\b|\bsmall\b|\bturbo\b|\bhaiku\b|\bmicro\b)/i;
+function tierScore(m) {
+  const s = (m.id + ' ' + (m.name || '')).toLowerCase();
+  if (LIGHT.test(s)) return 0.42;
+  if (HEAVY.test(s)) return 1.0;
+  if (MID.test(s)) return 0.82;
+  return 0.6;
+}
+function cnyny(usd) { return usd * rateCny(); }
+
+/* 单次调用成本（美元）：把缓存命中折算进去 */
+function unitCost(m, task) {
+  const cacheF = (m.priceCache1M != null && m.priceIn1M > 0) ? (m.priceCache1M / m.priceIn1M) : 1;
+  const hit = Math.min(0.95, Math.max(0, task.cacheHit || 0));
+  const inCost = (task.inputTok / 1e6) * m.priceIn1M * ((1 - hit) + hit * cacheF);
+  const outCost = (task.outputTok / 1e6) * m.priceOut1M;
+  return inCost + outCost + (m.reqFee || 0);
+}
+function monthCost(m, task) { return unitCost(m, task) * task.callsPerDay * planOpts.days; }
+
+/* 候选池：按任务的硬性能力需求过滤 */
+function planPool(task, models) {
+  return models.filter(m => {
+    if (DEPRECATED.test(m.id)) return false;
+    if (!(m.priceIn1M >= 0) || !(m.priceOut1M >= 0)) return false;  // 哨兵价 / 动态计价不参与比价
+    if (planOpts.noFree && m.free) return false;
+    if (m.context && m.context < task.needCtx * 0.5) return false;
+    for (const k of ['tools', 'reasoning', 'vision']) if (task.need[k] && !m[k]) return false;
+    if (task.privacy === 'high' && m.free) return false;   // 隐私任务不走免费端点
+    return true;
+  });
+}
+
+/* 打分排序：价格越高 sensitivity 越吃亏，能力需求越高越强模型占优 */
+function planRank(task, models) {
+  const pool = planPool(task, models);
+  if (!pool.length) return [];
+  const costs = pool.map(m => Math.max(1e-9, unitCost(m, task)));
+  // ⚠️ 必须用 log(c) 而不是 log(1+c)：单次调用成本是以美元计的小数（如 8e-5），
+  // 加 1 之后整个区间不足 1 个对数单位，贵 20 倍的模型价格分才掉 0.002 —— 等于没排序。
+  const lmn = Math.log(Math.min(...costs)), lmx = Math.log(Math.max(...costs));
+  const now = Date.now();
+  return pool.map((m, i) => {
+    const c = costs[i];
+    const priceScore = lmx - lmn < 1e-9 ? 1 : 1 - (Math.log(c) - lmn) / (lmx - lmn);
+    const days = m.created ? (now - m.created) / 86400e3 : 999;
+    const fresh = Math.max(0, Math.min(1, 1 - days / 730));
+    const ctxScore = m.context ? Math.min(1, m.context / (task.needCtx * 3)) : 0.5;
+    // 能力分以「档位」为主，新鲜度和上下文只是辅助 —— 否则一个便宜的新 Flash 会靠这两项压过旗舰
+    const quality = 0.60 * tierScore(m) + 0.20 * fresh + 0.20 * ctxScore;
+    let bonus = 0;
+    if (planOpts.cnFirst && isCn(m)) bonus += 0.12;
+    const score = (1 - planOpts.w) * priceScore + planOpts.w * quality + bonus;
+    return { m, unit: c, month: monthCost(m, task), priceScore, quality, score };
+  }).sort((a, b) => {
+    // 差价不足以区分时（一堆模型都贴着地板价），同价的情况下让更强的一个上位
+    if (Math.abs(b.score - a.score) < 0.002) return b.quality - a.quality;
+    return b.score - a.score;
+  });
+}
+
+/* 为该任务挑出：主力 / 备1 / 备2 / 免费兜底 */
+function planPick(task, models) {
+  const ranked = planRank(task, models);
+  const freePool = models.filter(m =>
+    !DEPRECATED.test(m.id) && m.free &&
+    (!m.context || m.context >= task.needCtx * 0.4) &&
+    ['tools', 'reasoning', 'vision'].every(k => !task.need[k] || m[k]));
+  const freePick = freePool.sort((a, b) => (b.context || 0) - (a.context || 0))[0] || null;
+  return { task, main: ranked[0] || null, b1: ranked[1] || null, b2: ranked[2] || null, free: freePick, ranked };
+}
+
+function planAll() {
+  const models = (DATA && DATA.models && DATA.models.ok) ? DATA.models.data : [];
+  return (PLAN ? PLAN.tasks : []).map(t => planPick(t, models));
+}
+
+/* ---------- ① 任务画像 ---------- */
+function renderPlanProfile() {
+  if (!PLAN) return;
+  // 来源文案从画像数据里读，不写死 —— 换成自己的画像后这里自动跟着变
+  const srcs = (PLAN && PLAN.sources) || [];
+  const src0 = srcs[0] || '—';
+  $('#plSrc').textContent = '分析源：' + (src0.length > 46 ? src0.slice(0, 46) + '…' : src0) + ' · ' + (PLAN.generated || '');
+  const p = PLAN.profile;
+  const totalCalls = PLAN.tasks.reduce((s, t) => s + t.callsPerDay, 0);
+  $('#plSum').innerHTML = [
+    ['任务类型', PLAN.tasks.length + ' 类 · 日均约 <b>' + totalCalls + '</b> 次调用'],
+    ['语言构成', esc(p.langMix)],
+    ['上下文特征', esc(p.peakPattern)],
+    ['预算特征', esc(p.budget)],
+    ['隐私注意', esc(p.privacy)],
+    ['分析依据', srcs.map(s => esc(s)).join('<br>')]
+  ].map(([k, v]) => '<div class="sc"><div class="k">' + esc(k) + '</div><div class="v">' + v + '</div></div>').join('');
+
+  $('#plTasks').innerHTML = PLAN.tasks.map(t =>
+    '<div class="pl-tk' + (planOpts.focus === t.key ? ' on' : '') + '" data-tk="' + esc(t.key) + '">' +
+      '<div class="hd"><b>' + esc(t.icon + ' ' + t.name) + '</b><span class="badge ' + (t.freq.indexOf('高频') >= 0 ? 'warn' : 'unk') + '">' + esc(t.freq) + '</span></div>' +
+      '<div class="mt">' +
+        '<span>上下文 <b>' + fmtCtx(t.needCtx) + '</b></span>' +
+        '<span>输入 <b>' + t.inputTok + '</b>t</span>' +
+        '<span>输出 <b>' + t.outputTok + '</b>t</span>' +
+        '<span>日均 <b>' + t.callsPerDay + '</b>次</span>' +
+        '<span>缓存命中 <b>' + Math.round((t.cacheHit || 0) * 100) + '%</b></span>' +
+      '</div>' +
+      '<div class="mt">' +
+        (t.need.tools ? '<span class="badge cap">🔧 工具</span>' : '') +
+        (t.need.reasoning ? '<span class="badge cap">🧠 推理</span>' : '') +
+        (t.need.vision ? '<span class="badge cap">👁 视觉</span>' : '') +
+        (t.privacy === 'high' ? '<span class="badge closed">🔒 隐私</span>' : t.privacy === 'mid' ? '<span class="badge warn">⚠ 半隐私</span>' : '') +
+        (t.cnStrong ? '<span class="badge">中文优先</span>' : '') +
+        '<span class="badge">省钱权重 ' + Math.round(t.priceWeight * 100) + '%</span>' +
+      '</div>' +
+      '<div class="nt">' + esc(t.note) + '</div>' +
+      '<div class="ev">📁 ' + esc(t.evidence.slice(0, 3).join(' · ')) + (t.evidence.length > 3 ? ' …' : '') + '</div>' +
+    '</div>').join('');
+  $('#plTasks').querySelectorAll('[data-tk]').forEach(el => el.onclick = () => {
+    planOpts.focus = el.dataset.tk; renderPlan();
+  });
+}
+
+/* ---------- ② 路由总表 ---------- */
+function renderPlanRoute() {
+  const rows = (DATA && DATA.models && DATA.models.ok) ? planAll() : null;
+  if (!rows || !rows.length) { $('#plRoute').innerHTML = empty('模型数据不可用，点右上角刷新'); return; }
+  const models = (DATA && DATA.models && DATA.models.ok) ? DATA.models.data : [];
+  if (!models.length) { $('#plRoute').innerHTML = empty('模型数据不可用'); return; }
+
+  const cell = p => p ? '<a class="badge cap" style="text-decoration:none;cursor:pointer" data-mid="' + esc(p.m.id) + '">' + esc(p.m.id.split('/').pop()) + '</a>' +
+      '<div style="font-size:10px;color:var(--ink3);margin-top:2px">¥' + cnyny(p.unit * 1000).toFixed(2) + '/千次</div>'
+    : '<span style="color:var(--ink3)">—</span>';
+
+  $('#plRoute').innerHTML = '<div style="overflow-x:auto">' + table(
+    ['任务', '主力', '备选 1', '备选 2', '免费兜底', '本地兜底', '月成本'],
+    rows.map((r, ri) => {
+      const t = r.task;
+      const mc = r.main ? r.main.month : 0;
+      const localOk = t.need.tools ? '本地 30B+ MoE' : '本地 14B+';
+      return '<tr class="click" data-row="' + ri + '">' +
+        '<td><b style="font-size:12px">' + esc(t.icon + ' ' + t.name) + '</b></td>' +
+        '<td>' + cell(r.main) + '</td>' +
+        '<td>' + cell(r.b1) + '</td>' +
+        '<td>' + cell(r.b2) + '</td>' +
+        '<td>' + cell(r.free ? { m: r.free, unit: unitCost(r.free, t) } : null) + '</td>' +
+        '<td><span class="badge warn">' + esc(localOk) + '</span></td>' +
+        '<td class="num"><b>¥' + cnyny(mc).toFixed(1) + '</b></td>' +
+      '</tr>';
+    }).join('')) + '</div>' +
+    '<div class="note" style="margin-top:10px"><b>怎么读：</b>主力 = 综合「能力需求 + 当前偏好 + 实时价格」得出的最高分；月成本按该任务自己的用量画像算。<b>能力分是启发式的</b>（本机拿不到 LMArena 跑分），只是排序参考；真要拍板还得自己试用几天。带 <span class="badge warn">🔧 工具</span> 的任务，本地兜底至少要 30B 级 MoE 才跑得动多步调用。<br>' +
+    '<b>已自动排除：</b>下线的旧型号（deprecated / legacy）、<code>:batch</code> 异步批处理变体（返回结果延迟到 24 小时内，交互式用法不该选它）、以及定价本身就是动态值、无法比价的路由型模型。</div>';
+
+  $('#plRoute').querySelectorAll('[data-mid]').forEach(el => el.onclick = ev => { ev.stopPropagation(); openModel(el.dataset.mid); });
+  $('#plRoute').querySelectorAll('[data-row]').forEach(el => el.onclick = () => {
+    const r = rows[Number(el.dataset.row)];
+    openPlanDetail(r);
+  });
+}
+
+function openPlanDetail(r) {
+  const t = r.task;
+  const lines = (r.ranked || []).slice(0, 10).map((x, i) =>
+    '<tr><td>' + (i + 1) + '</td><td><b style="font-size:12px">' + esc(x.m.id) + '</b><div style="font-size:10px;color:var(--ink3)">' + esc(x.m.vendor) + '</div></td>' +
+    '<td class="num">' + fmtCtx(x.m.context) + '</td>' +
+    '<td class="num">¥' + cnyny(x.month).toFixed(1) + '</td>' +
+    '<td class="num">' + (x.priceScore * 100).toFixed(0) + '</td>' +
+    '<td class="num">' + (x.quality * 100).toFixed(0) + '</td>' +
+    '<td class="num"><b>' + (x.score * 100).toFixed(0) + '</b></td></tr>').join('');
+  $('#mTitle').innerHTML = esc(t.icon + ' ' + t.name);
+  $('#mId').textContent = '能力需求：' + ['tools', 'reasoning', 'vision'].filter(k => t.need[k]).map(k => ({ tools: '工具调用', reasoning: '推理', vision: '视觉' }[k])).join(' / ') + (t.need.tools || t.need.reasoning || t.need.vision ? '' : '无硬性要求') + ' · 上下文 ≥ ' + fmtCtx(t.needCtx);
+  $('#mBody').innerHTML =
+    '<div class="sect"><h4>这个任务在干什么</h4><div class="desc">' + esc(t.note) + '</div></div>' +
+    '<div class="sect"><h4>依据（本机实际产物）</h4><div style="display:flex;gap:6px;flex-wrap:wrap">' +
+      t.evidence.map(e => '<span class="badge">' + esc(e) + '</span>').join('') + '</div></div>' +
+    '<div class="sect"><h4>候选前 10（按当前偏好排序）</h4>' +
+      (lines ? '<div style="overflow-x:auto"><table><thead><tr><th>#</th><th>模型</th><th>上下文</th><th>月成本</th><th>价格分</th><th>能力分</th><th>总分</th></tr></thead><tbody>' + lines + '</tbody></table></div>'
+             : empty('没有满足硬条件的模型：试着关掉「主力不用免费档」或放宽偏好滑块')) + '</div>' +
+    '<div class="sect"><h4>用量画像（可在下方改动逻辑里调）</h4><div class="kvgrid">' +
+      '<div class="kvbox"><div class="k">日均调用</div><div class="v">' + t.callsPerDay + ' <small>次</small></div></div>' +
+      '<div class="kvbox"><div class="k">平均输入</div><div class="v">' + t.inputTok + ' <small>tokens</small></div></div>' +
+      '<div class="kvbox"><div class="k">平均输出</div><div class="v">' + t.outputTok + ' <small>tokens</small></div></div>' +
+      '<div class="kvbox"><div class="k">缓存命中假设</div><div class="v">' + Math.round((t.cacheHit || 0) * 100) + ' <small>%</small></div></div>' +
+    '</div></div>';
+  $('#mask').classList.add('on'); $('#modal').classList.add('on');
+}
+
+/* ---------- ③ 月度成本估算 ---------- */
+function renderPlanCost() {
+  if (!PLAN || !(DATA && DATA.models && DATA.models.ok)) { $('#plCost').innerHTML = empty('数据未就绪'); return; }
+  const rows = planAll();
+  let total = 0;
+  const body = rows.map(r => {
+    if (!r.main) return '';
+    total += r.main.month;
+    const share = ((r.main.month / Math.max(1e-9, total)) * 100);
+    return '<tr><td><b style="font-size:12px">' + esc(r.task.icon + ' ' + r.task.name) + '</b></td>' +
+      '<td class="num">' + r.task.callsPerDay + ' × ' + planOpts.days + '</td>' +
+      '<td><code style="font-size:11px">' + esc(r.main.m.id) + '</code></td>' +
+      '<td class="num">¥' + cnyny(r.main.unit * 1000).toFixed(2) + '</td>' +
+      '<td class="num"><b>¥' + cnyny(r.main.month).toFixed(1) + '</b><div class="pl-bar"><i style="width:' + Math.min(100, share).toFixed(0) + '%"></i></div></td></tr>';
+  }).join('');
+
+  const cnyTotal = cnyny(total);
+  const overPipeline = cnyTotal > planOpts.budget;
+  // 全量任务的替代方案：全部换最便宜模型 / 全部换最强模型
+  const cheapest = rows.reduce((s, r) => { const c = (r.ranked || []).slice().sort((a, b) => a.month - b.month)[0]; return s + (c ? c.month : 0); }, 0);
+  const strongest = rows.reduce((s, r) => { const c = (r.ranked || []).slice().sort((a, b) => b.quality - a.quality)[0]; return s + (c ? c.month : 0); }, 0);
+
+  $('#plCost').innerHTML =
+    '<div class="pl-sum" style="margin-bottom:12px">' +
+      '<div class="sc"><div class="k">当前方案月度总支出</div><div class="v"><b style="font-size:19px;color:' + (overPipeline ? 'var(--bad)' : 'var(--ok)') + '">¥' + cnyTotal.toFixed(1) + '</b>' +
+        ' <small style="color:var(--ink3)">/ 预算 ¥' + planOpts.budget + '</small>' +
+        '<div class="pl-bar"><i class="' + (overPipeline ? 'over' : '') + '" style="width:' + Math.min(100, cnyTotal / Math.max(1, planOpts.budget) * 100).toFixed(0) + '%"></i></div></div></div>' +
+      '<div class="sc"><div class="k">全用最低价模型</div><div class="v">¥' + cnyny(cheapest).toFixed(1) + ' /月<div class="pl-bar"><i style="width:' + Math.min(100, cheapest / Math.max(1e-9, total) * 100).toFixed(0) + '%"></i></div></div></div>' +
+      '<div class="sc"><div class="k">全用最高能力模型</div><div class="v">¥' + cnyny(strongest).toFixed(1) + ' /月<div class="pl-bar"><i class="over" style="width:' + Math.min(100, strongest / Math.max(1e-9, total) * 100).toFixed(0) + '%"></i></div></div></div>' +
+    '</div>' +
+    (overPipeline ? '<div class="note" style="border-color:var(--bad);background:var(--badS);margin-bottom:11px">💸 <b>超预算 ¥' + (cnyTotal - planOpts.budget).toFixed(1) + '</b>。把滑块往「省钱」拖，或放开分层路由：让脏活走便宜档、只有关键任务留旗舰 —— <b>用量最大的任务才是省钱的主战场</b>。</div>' : '') +
+    '<div style="overflow-x:auto"><table><thead><tr><th>任务</th><th>月调用量</th><th>选用模型</th><th>单次成本</th><th>月成本 / 占比</th></tr></thead><tbody>' + body + '</tbody></table></div>' +
+    '<div class="note" style="margin-top:11px"><b>算钱口径：</b>月成本 = 单次被调用 token 数 × 单价 ÷ 1e6 × 日均次数 × 天数；缓存命中部分按厂商标注的 <code>cache_read</code> 价折算（没标注的厂商保守地按不打折算）。</div>';
+}
+
+/* ---------- ④ Fallback ---------- */
+function renderPlanFb() {
+  if (!PLAN) return;
+  const rows = (DATA && DATA.models && DATA.models.ok) ? planAll() : [];
+  const t = rows.find(r => r.task.key === planOpts.focus) || rows[0];
+  const chainHtml = t ? (function () {
+    const step = (label, val, cls) => val ? '<span class="step ' + cls + '">' + esc(label) + '<br><code style="font-size:10.5px;background:rgba(255,255,255,.6)">' + esc(val) + '</code></span>' : '';
+    const ar = '<span class="ar">→</span>';
+    return '<div class="pl-chain">' +
+      step('① 主力', t.main ? t.main.m.id : '', 'main') + ar +
+      step('② 同档备 1', t.b1 ? t.b1.m.id : '', '') + ar +
+      step('③ 同档备 2', t.b2 ? t.b2.m.id : '', '') + ar +
+      step('④ 免费兜底', t.free ? t.free.id : '本机暂无匹配免费模型', '') + ar +
+      step('⑤ 本地兜底', t.task.need.tools ? 'http://localhost:1234/v1 · 30B MoE' : 'http://localhost:1234/v1 · 14B', 'last') +
+      '</div>';
+  })() : '';
+
+  const pickS = rows.map(r => {
+    if (!r.main) return null;
+    const key = r.task.key.replace(/-/g, '_');
+    return '  - model_name: ' + key + '          → ' + r.main.m.id +
+      (r.b1 ? '\n    fallback           → ' + r.b1.m.id : '') +
+      (r.b2 ? '\n    secondary-fallback → ' + r.b2.m.id : '');
+  }).filter(Boolean).join('\n');
+
+  const cfg =
+    '<span class="c"># LiteLLM / 网关级路由配置（把上面这张表抄成机器能读的规则）</span>\n' +
+    '<span class="k">model_list</span>:\n' + esc(pickS) + '\n\n' +
+    '<span class="k">router_settings</span>:\n' +
+    '  <span class="c"># ① 报错 / 限流 / 超时 → 换下一个（故障兜底）</span>\n' +
+    '  <span class="k">fallbacks</span>:\n' +
+    '    - <span class="s">cheap</span>: [<span class="s">backup</span>]\n' +
+    '  <span class="c"># ② 上下文超过窗口 → 切长上下文模型（容量兜底）</span>\n' +
+    '  <span class="k">context_window_fallbacks</span>:\n' +
+    '    - <span class="s">cheap</span>: [<span class="s">longctx</span>]\n' +
+    '  <span class="c"># ③ 单月支出触顶 → 降级到免费档（预算兜底）</span>\n' +
+    '  <span class="k">budget_limits</span>:\n' +
+    '    <span class="s">default</span>: <span class="s">¥' + planOpts.budget + '/月</span>';
+
+  $('#plFb').innerHTML =
+    '<div class="note" style="margin-bottom:11px"><b>当前查看：</b>' + esc(t ? t.task.icon + ' ' + t.task.name : '—') + '（在上方点任务卡片可切换）</div>' +
+    chainHtml +
+    '<h3 class="sub" style="margin-top:16px">触发条件与动作</h3>' +
+    '<div style="overflow-x:auto"><table><thead><tr><th>故障类型</th><th>识别信号</th><th>动作</th></tr></thead><tbody>' +
+      '<tr><td><b>限流</b></td><td>429 / "rate limit"</td><td>立刻切备选 1；同类机器全挂则落到免费档</td></tr>' +
+      '<tr><td><b>额度耗尽</b></td><td>402 / "insufficient quota"</td><td>切备选；晚上再估算当月支出是否超预算</td></tr>' +
+      '<tr><td><b>上下文超限</b></td><td>400 context_length_exceeded</td><td>切到上下文更长的模型（自动截断长历史）</td></tr>' +
+      '<tr><td><b>工具调用格式崩</b></td><td>连续 2 次 JSON 解析失败</td><td>降级到明确支持 tools 的稳定型号</td></tr>' +
+      '<tr><td><b>本地 OOM / 太慢</b></td><td>显存溢出或 TPS &lt; 5</td><td>反向兜底：从本地切回云端 Flash 档</td></tr>' +
+      '<tr><td><b>断网 / 隐私内容</b></td><td>手动或检测到敏感词</td><td>本地 <code>localhost:1234</code>（画像里标为隐私的任务默认走这条）</td></tr>' +
+    '</tbody></table></div>' +
+    '<h3 class="sub">可复制的网关配置</h3>' +
+    '<pre class="pl-code">' + cfg + '</pre>' +
+    '<div class="note"><b>提醒：</b>Fallback 和智能路由是两件事 —— 路由是"按任务挑最合适的"，Fallback 是"主的不行就换人"。别指望 Fallback 提升质量，它只是让任务不中断。</div>';
+}
+
+/* ---------- ⑤ 提供商 ---------- */
+const PROV = [
+  { n: 'OpenRouter', tag: '统一入口', ep: 'https://openrouter.ai/api/v1',
+    why: '一个 Key 覆盖 400+ 模型，fallback 和路由都在它那边做。你本机多数小众需求（试新模型、比价）靠它最省事。', when: '月支出 < $200；需要同时用 Claude / Gemini / DeepSeek' },
+  { n: 'DeepSeek 官方', tag: '省钱主力', ep: 'https://api.deepseek.com/v1',
+    why: '闲时/高峰双价 + 极低的缓存命中价 —— 你这种「长会话、系统提示重复」的用法命中率能到 70%，实际支出远低于标价。', when: '批量任务、代码答疑、Agent 主干' },
+  { n: '阿里云百炼 / 智谱 / Moonshot', tag: '国产兜底', ep: '各厂商开放平台',
+    why: '中文与合规更好，且各有免费额度。DeepSeek 高峰太贵或排队时可以分流过去。', when: '中文文书、国产模型备份、国内网络直连' },
+  { n: '本地 LM Studio', tag: '隐私与断网', ep: 'http://localhost:1234/v1',
+    why: '标为隐私的任务内容不出本机；断网也能跑。代价是慢且要 30B+ 才撑得住工具调用。', when: '隐私任务、离线、预算触顶' }
+];
+
+/* 结论由任务画像派生，不写死任何具体任务名 —— 这样换一份画像，结论自动跟着变 */
+function planConclusion() {
+  const tasks = (PLAN && PLAN.tasks) || [];
+  const short = t => (t.name || '').split(' / ')[0];
+  const priv = tasks.filter(t => t.privacy === 'high');
+  const bulk = tasks.filter(t => t.priceWeight >= 0.8);
+  const heavy = tasks.filter(t => t.need.reasoning && t.needCtx >= 64000);
+  const total = tasks.reduce((s, t) => s + t.callsPerDay, 0);
+  const bulkCalls = bulk.reduce((s, t) => s + t.callsPerDay, 0);
+  const share = total ? Math.round(bulkCalls / total * 100) : 0;
+  const nm = arr => arr.length ? '（' + arr.map(short).join('、') + '）' : '';
+  return '① 隐私任务' + nm(priv) + '走本地或国产原厂，别贪免费端点；' +
+    '② 批量脏活' + nm(bulk) + '全部压到最低价档，这类任务占调用次数约 <b>' + share + '%</b>，是省钱主战场；' +
+    '③ 只有需要「强推理 + 长上下文」的任务' + nm(heavy) + '值得用好模型；' +
+    '④ <b>统一用一个聚合入口 + 低价原厂做落地主干 + 本地做隐私兜底</b>，别把架构锁死在一家。';
+}
+function renderPlanProv() {
+  const models = (DATA && DATA.models && DATA.models.ok) ? DATA.models.data : [];
+  const cn = models.filter(isCn).length;
+  const free = models.filter(m => m.free).length;
+  const paid = models.filter(m => !m.free && m.priceOut1M > 0);
+  const cheap = paid.slice().sort((a, b) => (a.priceOut1M + a.priceIn1M) - (b.priceOut1M + b.priceIn1M))[0];
+  $('#plProv').innerHTML =
+    '<div class="pl-sum" style="margin-bottom:12px">' +
+      '<div class="sc"><div class="k">库内模型</div><div class="v">' + models.length + ' 个 · 国产 ' + cn + ' 个 · 免费 ' + free + ' 个</div></div>' +
+      '<div class="sc"><div class="k">当前最便宜付费模型</div><div class="v">' + (cheap ? esc(cheap.id) + '<br>¥' + cnyny(cheap.priceIn1M).toFixed(2) + ' / ¥' + cnyny(cheap.priceOut1M).toFixed(2) + ' 每 1M' : '—') + '</div></div>' +
+      '<div class="sc"><div class="k">实时汇率</div><div class="v">1 美元 ≈ ¥' + rateCny().toFixed(3) + '</div></div>' +
+    '</div>' +
+    '<div class="pl-provgrid">' + PROV.map(p =>
+      '<div class="cc"><span class="tag">' + esc(p.tag) + '</span><b>' + esc(p.n) + '</b>' +
+      '<p><code style="font-size:11px;background:var(--accS);color:#3730a3;padding:2px 6px;border-radius:5px;word-break:break-all">' + esc(p.ep) + '</code></p>' +
+      '<p style="margin-top:7px">' + esc(p.why) + '</p>' +
+      '<p style="margin-top:6px;color:var(--ink3)">→ 用在：' + esc(p.when) + '</p></div>').join('') + '</div>' +
+    '<div class="note" style="margin-top:12px"><b>结合当前画像的结论：</b>' + planConclusion() + '</div>';
+}
+
+/* ---------- 汇总渲染 ---------- */
+function renderPlan() {
+  if (!PLAN) { return; }
+  $('#plWv').textContent = Math.round(planOpts.w * 100) + '%';
+  renderPlanProfile(); renderPlanRoute(); renderPlanCost(); renderPlanFb(); renderPlanProv();
+}
+
+/* ---------- 控制台事件 ---------- */
+(function bindPlan() {
+  const w = $('#plW'), b = $('#plBudget'), d = $('#plDays'), cn = $('#plCn'), nf = $('#plNoFree');
+  if (!w) return;
+  const sync = () => {
+    planOpts.w = Number(w.value) / 100;
+    planOpts.budget = Math.max(0, Number(b.value) || 0);
+    planOpts.days = Math.max(1, Number(d.value) || 30);
+    planOpts.cnFirst = cn.checked;
+    planOpts.noFree = nf.checked;
+    renderPlan();
+  };
+  [w, b, d, cn, nf].forEach(el => el.addEventListener('input', sync));
+  $('#plReset').onclick = () => {
+    w.value = 45; b.value = 80; d.value = 30; cn.checked = false; nf.checked = true;
+    planOpts.focus = 'agent';
+    sync();
+  };
+})();
+
+/* ---------- 事件 ---------- */
+document.querySelectorAll('#p-models .chip').forEach(ch => ch.onclick = () => {
+  ch.classList.toggle('on');
+  const c = ch.dataset.c;
+  caps.has(c) ? caps.delete(c) : caps.add(c);
+  shown = 40; renderModels();
+});
+['#q','#fOpen','#fVendor','#fSort'].forEach(s => $(s).addEventListener('input', () => { shown = 40; renderModels(); }));
+$('#more').onclick = () => { shown += 40; renderModels(); };
+
+/* 国产模型页交互 */
+document.querySelectorAll('#p-cn .chip').forEach(ch => ch.onclick = () => {
+  ch.classList.toggle('on');
+  const c = ch.dataset.cn;
+  cnCaps.has(c) ? cnCaps.delete(c) : cnCaps.add(c);
+  cnShown = 40; renderCn();
+});
+['#cnVendor','#cnSort'].forEach(s => $(s).addEventListener('input', () => { cnShown = 40; renderCn(); }));
+$('#cnMore').onclick = () => { cnShown += 40; renderCn(); };
+$('#cnVendorCards').addEventListener('click', e => {
+  if (e.target.closest('a')) return; // 点官网链接只跳转，不做筛选
+  const el = e.target.closest('[data-cnk]');
+  if (!el) return;
+  $('#cnVendor').value = el.dataset.cnk; cnShown = 40; renderCn();
+});
+
+/* 免费接口页交互 */
+$('#fq').addEventListener('input', () => { fShown = 40; renderFree(); });
+$('#fMore').onclick = () => { fShown += 40; renderFree(); };
+document.querySelectorAll('#p-free [data-fmode]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#p-free [data-fmode]').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  fMode = b.dataset.fmode;
+  renderFree();
+});
+
+document.body.addEventListener('click', e => {
+  if (e.target.closest('a')) return; // 链接自行打开新标签，不触发弹窗
+  const card = e.target.closest('.mcard, #rank-price .click, #rank-new .click, #rank-hf .click, #hfNew .click, #cnTable .click');
+  if (card) {
+    if (card.dataset.hf) { openHf(card.dataset.hf); return; }
+    if (card.dataset.id) { openModel(card.dataset.id); return; }
+  }
+  if (e.target.id === 'mask' || e.target.id === 'mClose') { $('#mask').classList.remove('on'); $('#modal').classList.remove('on'); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('#mask').classList.remove('on'); $('#modal').classList.remove('on'); } });
+
+$('#refresh').onclick = () => load(true);
+
+function renderAll() {
+  renderMeta(); renderRank(); vendorOptions(); renderModels(); renderCn(); renderClients(); renderTrend(); renderFree(); renderPlan();
+  if (DATA && DATA.error) $('#meta').innerHTML = '<span class="badge stale">服务出错</span> ' + esc(DATA.error).slice(0,80);
+}
+load(false);
+
+/* ---------- 免费接口页（合并自 AI 雷达 v2） ---------- */
+let fShown = 40;
+function copyId(txt) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(() => { flash('已复制：' + txt); });
+  } else { flash('复制失败（浏览器限制）'); }
+}
+function flash(msg) {
+  const el = $('#fCount'); if (!el) return;
+  const old = el.dataset.old || el.textContent;
+  if (!el.dataset.old) el.dataset.old = old;
+  el.textContent = msg;
+  clearTimeout(el._t); el._t = setTimeout(() => { el.textContent = el.dataset.old; }, 1600);
+}
+
+function renderEndpoints() {
+  const eps = (DATA && DATA.endpoints) || [];
+  $('#epGrid').innerHTML = eps.map(e =>
+    '<div class="card"><div class="chd"><h3>'+esc(e.name)+'</h3>' +
+      '<span class="badge '+(e.needKey?'warn':'free')+'">'+(e.needKey?'需 Key':'免 Key')+'</span></div>' +
+    '<div class="cbody"><div style="font-size:10.5px;color:var(--ink3);margin-bottom:4px">API 接口地址</div>' +
+      '<code style="display:block;background:var(--accS);color:#3730a3;padding:8px 10px;border-radius:8px;font-size:12px;word-break:break-all;margin-bottom:9px">'+esc(e.endpoint)+'</code>' +
+      '<div style="font-size:10.5px;color:var(--ink3);margin-bottom:4px">模型列表接口</div>' +
+      '<code style="display:block;background:var(--unit);color:var(--ink2);padding:7px 9px;border-radius:8px;font-size:11.5px;word-break:break-all;margin-bottom:9px">'+esc(e.modelsUrl)+'</code>' +
+      '<div style="font-size:12px;color:var(--ink2);line-height:1.6">'+esc(e.note)+'</div>' +
+      '<div style="font-size:11.5px;color:var(--ink3);line-height:1.55;margin-top:7px">🆓 '+esc(e.freeHint)+'</div>' +
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">' +
+        (e.site ? '<a class="badge cap" style="text-decoration:none" target="_blank" rel="noopener" href="'+esc(e.site)+'" title="'+esc(e.site)+'">🌐 官网直达 ↗</a>' : '') +
+        (e.keyUrl ? '<a class="badge cap" style="text-decoration:none" target="_blank" rel="noopener" href="'+esc(e.keyUrl)+'" title="'+esc(e.keyUrl)+'">🔑 申请/管理 Key ↗</a>' : '') +
+      '</div>' +
+    '</div></div>'
+  ).join('');
+}
+
+function freeFiltered() {
+  const ms = (DATA && DATA.models && DATA.models.ok) ? DATA.models.data.filter(m => m.free) : [];
+  const q = ($('#fq').value || '').trim().toLowerCase();
+  let r = ms;
+  if (q) r = r.filter(m => (m.name + ' ' + m.vendor + ' ' + m.id + ' ' + (m.desc||'')).toLowerCase().includes(q));
+  return r;
+}
+let fMode = 'vendor';   // 'vendor' = 按模型厂商 | 'provider' = 按提供商（OpenRouter 等路由）
+function freeCard(m) {
+  return '<div class="mcard" data-id="'+esc(m.id)+'">' +
+      '<div class="top"><div style="flex:1;min-width:0"><div class="nm">'+esc(m.name)+'</div>' +
+        '<div class="vd">'+esc(m.id)+'</div></div>' +
+        '<span class="badge free" style="cursor:pointer" data-copy="'+esc(m.id)+'">复制</span></div>' +
+      '<div class="kv"><span>上下文 <b>'+fmtCtx(m.context)+'</b></span>' +
+        (m.reasoning?'<span>🧠 推理</span>':'') + (m.tools?'<span>🔧 工具</span>':'') +
+        (m.vision?'<span>👁 视觉</span>':'') + '</div>' +
+    '</div>';
+}
+function renderFree() {
+  renderEndpoints();
+  const list = freeFiltered();
+  let html;
+  if (!list.length) {
+    html = '<div class="empty" style="grid-column:1/-1">暂无免费模型数据，点右上角「↻ 刷新数据」重试（OpenRouter 免 Key 即可拉取）</div>';
+  } else if (fMode === 'provider') {
+    // —— 按提供商（路由/聚合厂商）分组：7 家全部展示，没数据的标"需 Key" ——
+    const eps = (DATA && DATA.endpoints) || [];
+    const groups = {};
+    list.forEach(m => { const k = m.provider || 'openrouter'; (groups[k] = groups[k] || []).push(m); });
+    html = eps.map(e => {
+      const items = groups[e.key] || [];
+      const body = items.length
+        ? '<div class="mgrid">'+items.map(freeCard).join('')+'</div>'
+        : '<div class="empty" style="border:1px dashed var(--line);border-radius:12px;padding:14px;text-align:left">该提供商的免费模型需填入<b>它自己的 API Key</b> 才能拉取 · 接口地址：<code style="background:var(--accS);color:#3730a3;padding:3px 7px;border-radius:6px;font-size:11.5px">'+esc(e.endpoint)+'</code>' +
+          (e.keyUrl ? ' · <a target="_blank" rel="noopener" href="'+esc(e.keyUrl)+'">申请/管理 Key ↗</a>' : '') +
+          (e.site ? ' · <a target="_blank" rel="noopener" href="'+esc(e.site)+'">官网 ↗</a>' : '') + '</div>';
+      const nameHtml = e.site
+        ? '<a href="'+esc(e.site)+'" target="_blank" rel="noopener" style="color:inherit;text-decoration:none" title="打开 '+esc(e.name)+' 官网">'+esc(e.name)+' ↗</a>'
+        : esc(e.name);
+      return '<div class="fgroup"><div class="gh"><span>'+nameHtml+'</span><span class="cnt">'+(items.length ? items.length+' 个' : '需 Key')+'</span></div>'+body+'</div>';
+    }).join('');
+  } else {
+    // —— 按模型厂商（vendor）分组，数量多的厂商排前面 ——
+    const groups = {};
+    list.forEach(m => { const k = m.vendor || '其他'; (groups[k] = groups[k] || []).push(m); });
+    const keys = Object.keys(groups).sort((a, b) => groups[b].length - groups[a].length);
+    html = keys.map(k => {
+      const items = groups[k];
+      return '<div class="fgroup"><div class="gh"><span>'+esc(k)+'</span><span class="cnt">'+items.length+' 个</span></div><div class="mgrid">'+items.map(freeCard).join('')+'</div></div>';
+    }).join('');
+  }
+  $('#fGrid').innerHTML = html;
+  // 绑定复制按钮（阻止冒泡，避免误触发详情弹窗）
+  $('#fGrid').querySelectorAll('[data-copy]').forEach(el => {
+    el.addEventListener('click', ev => { ev.stopPropagation(); copyId(el.dataset.copy); });
+  });
+  const cnt = $('#fCount');
+  if (cnt) cnt.textContent = fMode === 'provider'
+    ? '按提供商 · ' + ((DATA && DATA.endpoints) || []).length + ' 家（当前数据全部来自 OpenRouter）'
+    : '按模型厂商 · 共 ' + list.length + ' 个免费模型 · ' + Object.keys(list.reduce((g,m)=>{g[m.vendor||'其他']=1;return g;},{})).length + ' 家厂商';
+}
+})();
+</script>
+</body>
+</html>

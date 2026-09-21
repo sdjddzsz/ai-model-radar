@@ -1,0 +1,6 @@
+# 行尾统一：文本一律 LF 入库，cmd 脚本保持 CRLF，图片按二进制
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.png binary
+*.jpg binary
+*.ico binary
