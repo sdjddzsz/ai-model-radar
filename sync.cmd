@@ -10,8 +10,20 @@ git add -A
 echo === git commit ===
 git commit -m "%MSG%"
 if errorlevel 1 echo (nothing to commit, or commit failed - see above)
-echo === git push ===
-git push
+echo === git push (direct) ===
+git push origin master
+if errorlevel 1 (
+  echo.
+  echo [!] Direct push failed. Retrying once via local proxy...
+  set HTTPS_PROXY=http://127.0.0.1:7890
+  set HTTP_PROXY=http://127.0.0.1:7890
+  git push origin master
+)
 echo.
-echo Done. Check https://github.com to confirm.
+if not errorlevel 1 (
+  echo Done. Check https://github.com/sdjddzsz/ai-model-radar
+) else (
+  echo Failed. If you are in a network where github.com is blocked,
+  echo turn on your accelerator and run this script again.
+)
 pause
