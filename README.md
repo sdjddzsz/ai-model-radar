@@ -110,11 +110,28 @@ AILens/
 ├─ profile.local.mjs    你的真实画像（gitignore）
 ├─ profile-scan.mjs     任务画像自动重算（扫本机日志与产物，零依赖）
 ├─ 重算画像.cmd          Windows 双击入口（先预览再写入）
+├─ push-via-api.mjs     github.com 被封时的备用推送（走 GitHub Data API，见下）
 ├─ run.cmd              启动器（自适应路径）
 ├─ sync.cmd             一键 commit + push
 ├─ backups/             画像备份（gitignore，含个人信息）
 └─ cache/               抓取缓存（断网自动降级用旧数据，gitignore）
 ```
+
+## 推送：github.com 被封时的备用通路
+
+某些网络下 `github.com:443` 直连被阻断、代理也会 502，但 `api.github.com` 仍然可达。
+这时 `git push` 无论怎么重试都推不上去，可以改用 GitHub 的 Git Data API：
+
+```bash
+node push-via-api.mjs "your commit message"
+```
+
+它做的事：把每个文件以 **base64** 建 blob（直接传文本会破坏 GBK 编码的 .cmd），
+以远端 tree 为 `base_tree` 建新 tree（保证其它文件不被清空）、建 commit、强制移动 ref，
+最后在本地用相同 tree / parent / 作者 / 时间重建同一个提交，让 `HEAD` 与 `origin/master` 对齐。
+
+前提：本机装了 [GitHub CLI](https://cli.github.com/) 且已 `gh auth login`。
+`sync.cmd` 会先试直连、再试代理，都失败时调用它。
 
 ## 数据源
 
