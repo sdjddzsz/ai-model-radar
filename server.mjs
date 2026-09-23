@@ -6,6 +6,7 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -352,13 +353,128 @@ async function gather(force) {
 /* ============================ 任务画像加载（驱动「使用方案」页） ============================ */
 /* 加载顺序：profile.local.mjs（本机专属，不进 Git）→ profile.example.mjs（仓库自带的通用示例）。
    把自己的画像写成 profile.local.mjs 即可覆盖，代码无需改动。 */
-let planCache = null;
+let planCache = null;   // { file, mtimeMs, data }
+/* 按文件 mtime 热加载：改完 profile.local.mjs 不用重启服务，下次请求就是新的。
+   （ESM 的 import 缓存会记住整个进程，所以给 URL 带上 mtime 当版本号；
+    只有文件真的被改过才会产生新模块，不会每请求都堆一个模块。） */
 async function loadPlan() {
-  if (planCache) return planCache;
   for (const f of ['./profile.local.mjs', './profile.example.mjs']) {
-    try { planCache = (await import(f)).default; break; } catch (e) { /* 换下一个 */ }
+    const file = path.join(__dirname, f.replace(/^\.\//, ''));
+    if (!fs.existsSync(file)) continue;
+    const mt = fs.statSync(file).mtimeMs;
+    try {
+      if (planCache && planCache.file === f && planCache.mtimeMs === mt) return planCache.data;
+      const mod = await import(f + '?m=' + mt);
+      planCache = { file: f, mtimeMs: mt, data: mod.default };
+      return planCache.data;
+    } catch (e) { /* 换下一个 */ }
   }
-  return planCache;
+  return planCache ? planCache.data : null;
+}
+
+/* ============================ 自动更新（启动即刷 + 定时轮询） ============================ */
+/* 三档行为，都可以用环境变量覆盖（在 .cmd 里 set 即可，不用改代码）：
+     AILENS_START_REFRESH = stale | always | off   启动策略，默认 stale
+     AILENS_STALE_MIN     = stale 模式下的"缓存还算新"分钟数，默认 10
+     AILENS_AUTO_HOURS    = 常驻期间定时重抓的间隔小时数，默认 6；设 0 关闭定时
+   stale（默认）＝缓存超过 10 分钟就重抓，10 分钟内重启不重复拉；
+   always              ＝每次启动都全量重抓（最"新"，但每次开机都要等 5–20 秒）。 */
+const START_REFRESH = (process.env.AILENS_START_REFRESH || 'stale').toLowerCase();
+const STALE_MS = Math.max(0, Number(process.env.AILENS_STALE_MIN || 10)) * 60e3;
+const AUTO_MS = Math.max(0, Number(process.env.AILENS_AUTO_HOURS || 6)) * 3600e3;
+
+const auto = { lastAt: 0, nextAt: 0, runs: 0, running: false, lastError: null, start: START_REFRESH, intervalH: AUTO_MS ? AUTO_MS / 3600e3 : 0 };
+let inflight = null;
+
+/* 并发锁：全量抓一次要几秒到十几秒，这期间任何请求都复用同一次结果，不并发重抓。
+   启动预热没跑完时浏览器进来的首次请求也会等到这一次完成 —— 打开即最新，且只抓一次。 */
+function refresh(force) {
+  if (inflight) return inflight;
+  auto.running = true;
+  inflight = gather(force)
+    .then(d => {
+      auto.lastAt = Date.now();
+      auto.nextAt = AUTO_MS ? auto.lastAt + AUTO_MS : 0;
+      auto.runs++; auto.lastError = null;
+      return d;
+    })
+    .catch(e => { auto.lastError = String(e.message || e); throw e; })
+    .finally(() => { auto.running = false; inflight = null; });
+  return inflight;
+}
+
+/* 主缓存（模型价格表）的年龄 —— 用来判断启动时值不值得重抓 */
+function cacheAge(name) {
+  const f = cachePath(name);
+  return fs.existsSync(f) ? Date.now() - fs.statSync(f).mtimeMs : Infinity;
+}
+const hhmm = t => new Date(t).toTimeString().slice(0, 5);
+
+async function bootRefresh() {
+  if (START_REFRESH === 'off') { console.log('自动更新：已关闭（AILENS_START_REFRESH=off）'); return; }
+  const age = cacheAge('openrouter');
+  if (START_REFRESH === 'stale' && age < STALE_MS) {
+    console.log('自动更新：缓存仍是新的（' + Math.round(age / 60e3) + ' 分钟前抓过），本次启动不重复拉取。');
+    console.log('           想每次启动都重抓 → 在启动命令里设 AILENS_START_REFRESH=always');
+    return;
+  }
+  console.log('自动更新：正在拉取最新数据…（约 5–20 秒，期间打开面板会等这一次结果）');
+  try {
+    const d = await refresh(true);
+    const n = (d.models && d.models.ok && d.models.data.length) || 0;
+    const nw = (d.news && d.news.items) ? d.news.items.length : 0;
+    console.log('自动更新：完成 ✓ 模型 ' + n + ' 个、资讯 ' + nw + ' 条');
+  } catch (e) {
+    console.log('自动更新：失败，自动降级到上次缓存 —— ' + (e.message || e));
+  }
+}
+
+/* 常驻期间定时重抓：服务开着就会一直保持数据新鲜，不用手动点刷新 */
+if (AUTO_MS) {
+  setInterval(() => {
+    console.log('[' + hhmm(Date.now()) + '] 定时自动更新（每 ' + auto.intervalH + ' 小时）…');
+    refresh(true)
+      .then(() => console.log('[' + hhmm(Date.now()) + '] 定时更新完成 ✓'))
+      .catch(e => console.log('[' + hhmm(Date.now()) + '] 定时更新失败，继续用缓存 —— ' + (e.message || e)));
+  }, AUTO_MS);
+}
+
+/* ============================ 画像：备份 / 还原 / 重算（界面按钮用） ============================ */
+/* 只认 profile.local*.mjs，且只在 backups\ 目录里读写 —— 不做任意文件操作。 */
+const BACKUP_DIR = path.join(__dirname, 'backups');
+const PROFILE_FILE = path.join(__dirname, 'profile.local.mjs');
+const SAFE_NAME = /^profile\.local[\w.\-]*\.mjs$/;
+fs.mkdirSync(BACKUP_DIR, { recursive: true });
+
+const stamp = () => { const d = new Date(), p = n => String(n).padStart(2, '0');
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + '_' + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds()); };
+
+/* 复制后把时间改成"现在"：Windows 的 CopyFile 会沿用源文件的 mtime，
+   否则多份备份显示成同一时刻，排序和「还原到哪一份」都会失真。 */
+function copyAsNew(src, dst) {
+  fs.copyFileSync(src, dst);
+  const t = new Date();
+  try { fs.utimesSync(dst, t, t); } catch (e) {}
+}
+
+function listBackups() {
+  try {
+    return fs.readdirSync(BACKUP_DIR).filter(f => SAFE_NAME.test(f)).map(f => {
+      const st = fs.statSync(path.join(BACKUP_DIR, f));
+      return { name: f, mtime: st.mtimeMs, size: st.size };
+    }).sort((a, b) => b.mtime - a.mtime);
+  } catch (e) { return []; }
+}
+function readBody(req) {
+  return new Promise(r => {
+    let s = '';
+    req.on('data', c => { s += c; });
+    req.on('end', () => { try { r(JSON.parse(s || '{}')); } catch (e) { r({}); } });
+  });
+}
+function json(res, obj, code) {
+  res.writeHead(code || 200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify(obj));
 }
 
 /* ============================ HTTP 服务 ============================ */
@@ -371,7 +487,9 @@ const server = http.createServer(async (req, res) => {
   if (p === '/api/all') {
     const force = u.searchParams.get('refresh') === '1';
     try {
-      const data = await gather(force);
+      const data = await refresh(force);
+      // 自动更新的状态一并返回，前端顶部据此显示「下次自动更新时间」
+      data.auto = { start: auto.start, intervalH: auto.intervalH, lastAt: auto.lastAt || null, nextAt: auto.nextAt || null, running: auto.running, runs: auto.runs, lastError: auto.lastError };
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
       res.end(JSON.stringify(data));
     } catch (e) {
@@ -384,6 +502,49 @@ const server = http.createServer(async (req, res) => {
   if (p === '/api/plan') {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify(await loadPlan()));
+    return;
+  }
+
+  /* ---- 画像备份 / 还原 / 重算 ---- */
+  if (p === '/api/profile/backups') {
+    json(res, { ok: true, dir: BACKUP_DIR, backups: listBackups() });
+    return;
+  }
+
+  if (p === '/api/profile/backup' && req.method === 'POST') {
+    if (!fs.existsSync(PROFILE_FILE)) { json(res, { ok: false, error: '还没有 profile.local.mjs' }, 404); return; }
+    try {
+      const name = 'profile.local-' + stamp() + '.mjs';
+      copyAsNew(PROFILE_FILE, path.join(BACKUP_DIR, name));
+      json(res, { ok: true, name, backups: listBackups() });
+    } catch (e) { json(res, { ok: false, error: String(e.message || e) }, 500); }
+    return;
+  }
+
+  if (p === '/api/profile/restore' && req.method === 'POST') {
+    const body = await readBody(req);
+    const name = (body && body.name) || '';
+    if (!SAFE_NAME.test(name)) { json(res, { ok: false, error: '备份文件名不合法' }, 400); return; }
+    const src = path.join(BACKUP_DIR, name);
+    if (!fs.existsSync(src)) { json(res, { ok: false, error: '备份不存在：' + name }, 404); return; }
+    try {
+      // 还原前先把当前这份存档，免得还原错了再也回不去
+      if (fs.existsSync(PROFILE_FILE)) copyAsNew(PROFILE_FILE, path.join(BACKUP_DIR, 'profile.local-autosave-' + stamp() + '.mjs'));
+      copyAsNew(src, PROFILE_FILE);   // 顺带把 mtime 刷成现在，确保热加载一定触发
+      json(res, { ok: true, restored: name, backups: listBackups() });
+    } catch (e) { json(res, { ok: false, error: String(e.message || e) }, 500); }
+    return;
+  }
+
+  if (p === '/api/profile/rescan' && req.method === 'POST') {
+    const body = await readBody(req);
+    const mode = (body && body.mode) === 'write' ? 'write' : 'dry';
+    const args = [path.join(__dirname, 'profile-scan.mjs')];
+    args.push(mode === 'dry' ? '--dry' : '--no-bak');         // 界面写入前已自行备份，不让脚本再盖 .bak
+    try {
+      const r = spawnSync(process.execPath, args, { cwd: __dirname, encoding: 'utf8', timeout: 90000 });
+      json(res, { ok: r.status === 0, code: r.status, mode, out: (r.stdout || '') + (r.stderr || '') });
+    } catch (e) { json(res, { ok: false, error: String(e.message || e) }, 500); }
     return;
   }
 
@@ -416,7 +577,10 @@ function listen(p) {
   });
   server.listen(p, () => {
     console.log('AI 模型雷达服务已启动 → http://localhost:' + p);
+    if (AUTO_MS) console.log('定时自动更新：每 ' + auto.intervalH + ' 小时重抓一次（AILENS_AUTO_HOURS 可改）');
     console.log('（关闭本窗口即停止服务）');
+    // 先监听、再抓：浏览器打开时若这次还没抓完，会复用同一次结果，不会并发抓两遍
+    bootRefresh();
   });
 }
 listen(port);

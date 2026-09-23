@@ -3,6 +3,10 @@ cache/
 
 # 本机专属任务画像 —— 含个人信息，永远不要提交
 profile.local.mjs
+profile.local.mjs.bak
+
+# 画像备份（界面/脚本生成，含个人信息）
+backups/
 
 # 系统杂项
 *.log
