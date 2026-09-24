@@ -4,3 +4,7 @@
 *.png binary
 *.jpg binary
 *.ico binary
+
+# 语言统计：public/ 是前端面板（单文件、105KB），不标的话 GitHub 会把仓库语言判成 HTML，
+# 而真正的核心逻辑是 server.mjs 的零依赖 Node 服务。标成 vendored 后语言显示为 JavaScript。
+public/** linguist-vendored

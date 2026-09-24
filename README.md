@@ -1,5 +1,12 @@
 # 🧭 AI 模型雷达 (AILens)
 
+> **English** — A zero-dependency, self-hosted dashboard for LLM selection.
+> It pulls live data from OpenRouter, Hugging Face, GitHub and multiple news feeds, normalizes it,
+> caches it on disk with graceful fallback, and answers one practical question:
+> *which model should I run for each of my tasks, what's the fallback, and what does it cost per month?*
+> Built on Node 22's native `http` + `fetch` — no frameworks, no build step.
+> Chinese docs below.
+
 一个**零依赖、本地运行**的大模型决策面板：实时拉取 OpenRouter / Hugging Face / GitHub / 多源资讯，
 把「模型价格、能力、免费额度、厂商接口」放在一个页面里，并在此基础上回答一个更实际的问题——
 
