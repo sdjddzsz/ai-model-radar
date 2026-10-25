@@ -1,0 +1,4100 @@
+{
+  "models": {
+    "openai/gpt-6.1-sol-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6.1-sol": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-sonnet-5.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-sonnet-5.5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000001,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "typesafe/jev-router": {
+      "tier": "blocked",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": -1,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "perceptron/perceptron-mk1.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 1.5e-7,
+      "ctx": 36864,
+      "missedRuns": 0
+    },
+    "fireworks/ember-1": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000003,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "z-ai/glm-5.3-prime": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.0000028,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.8-max-prime": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000004,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "stealth/space-bunny-alpha": {
+      "tier": "delisted",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1791197471774,
+      "price": 0,
+      "ctx": 1000000,
+      "missedRuns": 1207,
+      "delistedAt": 1791289326708,
+      "lastTransition": 1791289326708
+    },
+    "aion-labs/aion-3.5-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 7e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "aion-labs/aion-3.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000003,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "upstage/solar-mini4": {
+      "tier": "cheap",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 5e-8,
+      "ctx": 524288,
+      "missedRuns": 0
+    },
+    "cohere/command-a-plus": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 3e-7,
+      "ctx": 192000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-luna-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 1e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-luna-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 5e-8,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-luna": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 1e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-luna:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 5e-8,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-sol-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-sol-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000001,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-sol": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-sol:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000001,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-5.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000004,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-5.5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "xiaomi/mimo-v2.6-pro-ultraspeed": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.00000435,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "xiaomi/mimo-v2.6-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 1.4e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "xiaomi/mimo-v2.6-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 4.35e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "x-ai/grok-4.7": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 500000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.8-omni-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 1.5e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "prism-ml/ternary-bonsai-2-27b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 7.5e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "z-ai/glm-5.3-flashx": {
+      "tier": "premium",
+      "firstSeen": 1790829785704,
+      "lastSeen": 1792908844830,
+      "price": 3.7e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "unbiased/pareto": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791927513446,
+      "price": 0.0000025,
+      "ctx": 262144,
+      "missedRuns": 1126,
+      "delistedAt": 1791942441240,
+      "lastTransition": 1791942441240
+    },
+    "~deepseek/deepseek-pro-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 1.188e-7,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1790831051737
+    },
+    "~deepseek/deepseek-flash-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 2e-8,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1790831051737
+    },
+    "inference-net/schematron-v2-turbo": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 3e-8,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "inference-net/schematron-v2-small": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 5e-8,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "~openai/gpt-astra-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.00001,
+      "ctx": 1050000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051737
+    },
+    "~openai/gpt-sol-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051737
+    },
+    "~openai/gpt-terra-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051737
+    },
+    "~openai/gpt-luna-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 1e-7,
+      "ctx": 1050000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051737
+    },
+    "sakana/fugu-ultra-v2": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000005,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "sakana/fugu-max": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "inclusionai/ling-3.0-flash-vl": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 6e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-v4.1-flash": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 2e-8,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1792803400009
+    },
+    "deepseek/deepseek-v4.1-flash:batch": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 5e-8,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1792204437336
+    },
+    "inception/mercury-2.5": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 4e-8,
+      "ctx": 260000,
+      "missedRuns": 0
+    },
+    "nex-agi/nex-n2.5-mini": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 2.5e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "nex-agi/nex-n2.5-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 7.5e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-astra": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.00001,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-astra:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000005,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-astra-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.00001,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6-astra-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000005,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "inclusionai/ling-3.0-flash-sante:free": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791465070617,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 1188,
+      "delistedAt": 1791546247442,
+      "lastTransition": 1791546247442
+    },
+    "qwen/qwen3.8-max-0902": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "meta/muse-spark-1.3-contributor": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 1e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "meta/muse-spark-1.3": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.00000125,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3.8-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 8.25e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3.8-flash:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 3.75e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "anthropic/claude-fable-5.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.00001,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-fable-5.1:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000005,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "ibm-granite/granite-4.2-8b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 6e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "tencent/hy4-preview": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 8.34e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "inclusionai/ling-3.0-flash-fin": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791905913560,
+      "price": 4.2e-8,
+      "ctx": 262144,
+      "missedRuns": 1127,
+      "delistedAt": 1791942260934,
+      "lastTransition": 1791942260934
+    },
+    "~z-ai/glm-flash-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 4.18e-8,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "qwen/qwen3.8-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 1.5e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "z-ai/glm-5.3-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 1.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1792906684937
+    },
+    "z-ai/glm-5.3-flash:batch": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 5e-8,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "meta/muse-spark-1.2-contributor": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 1e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-v4-flash-vision-exp": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 2.156e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "tencent/hy-mt2-1.8b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 4.4e-8,
+      "ctx": 8192,
+      "missedRuns": 0
+    },
+    "tencent/hy-mt2-30b-a3b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 7.4e-8,
+      "ctx": 8192,
+      "missedRuns": 0
+    },
+    "~z-ai/glm-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 7.03e-8,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "tencent/hy-mt2-7b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 7.4e-8,
+      "ctx": 8192,
+      "missedRuns": 0
+    },
+    "z-ai/glm-5.3": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 7.9e-8,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1792726657959
+    },
+    "z-ai/glm-5.3:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 4.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.8-27b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 2e-7,
+      "ctx": 1000000,
+      "missedRuns": 0,
+      "lastTransition": 1792724857302
+    },
+    "qwen/qwen3.8-27b:free": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791219070898,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 1206,
+      "delistedAt": 1791290406847,
+      "lastTransition": 1791290406847
+    },
+    "dots-studio/dots-3-note-preview:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0,
+      "ctx": 512000,
+      "missedRuns": 0
+    },
+    "google/gemini-3.7-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 7.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3.7-flash:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 3.75e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "bytedance-seed/seed-2-1-turbo": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.8-2.4t-a95b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "bytedance-seed/seed-2.0-code": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-v4-pro-0813": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 6.6e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "x-ai/grok-4.6": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 500000,
+      "missedRuns": 0
+    },
+    "liquid/lfm-2.5-2.6b:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0,
+      "ctx": 65536,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3.5-lightning": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 7e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3.5-lightning:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "sakana/sakana-namazu": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 9.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "upstage/solar-pro4": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 1.5e-7,
+      "ctx": 524288,
+      "missedRuns": 0,
+      "lastTransition": 1792457324085
+    },
+    "meta/muse-glimmer-30b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 3e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "meta/muse-spark-1.2": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.00000125,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "~deepseek/deepseek-v4-flash-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 4.22e-8,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "deepseek/deepseek-v4-flash-0731": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 4.22e-8,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1792781799843
+    },
+    "thinkingmachines/inkling-small": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 4.5e-7,
+      "ctx": 524288,
+      "missedRuns": 0
+    },
+    "thinkingmachines/inkling-small:free": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.7-flash": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 3e-8,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.000005,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844830,
+      "price": 0.0000025,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "inclusionai/ling-3.0-flash": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.1e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "poolside/laguna-s-2.1": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 9e-8,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "poolside/laguna-s-2.1:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "google/gemini-3.6-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3.6-flash:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.75e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3.5-flash-lite": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3.5-flash-lite:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "meituan/longcat-2.0": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 1048756,
+      "missedRuns": 0
+    },
+    "thinkingmachines/inkling": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 524288,
+      "missedRuns": 0
+    },
+    "thinkingmachines/inkling:free": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "openrouter/auto-beta": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": -1,
+      "ctx": 2000000,
+      "missedRuns": 0
+    },
+    "moonshotai/kimi-k3": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.39e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "moonshotai/kimi-k3:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000228,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "meta/muse-spark-1.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "kwaipilot/kat-coder-pro-v2.5": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791338583938,
+      "price": 7.4e-7,
+      "ctx": 262144,
+      "missedRuns": 1201,
+      "delistedAt": 1791379588315,
+      "lastTransition": 1791379588315
+    },
+    "openai/gpt-5.6-luna-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-luna-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-luna": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-luna:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-terra-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-terra-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-terra": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-terra:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-sol-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000004,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-sol-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-sol": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000004,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.6-sol:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "x-ai/grok-4.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 500000,
+      "missedRuns": 0
+    },
+    "~x-ai/grok-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 500000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "aion-labs/aion-3.0-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "aion-labs/aion-3.0": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000003,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "tencent/hy3": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.32e-7,
+      "ctx": 262144,
+      "missedRuns": 0,
+      "lastTransition": 1792803400009
+    },
+    "poolside/laguna-xs-2.1": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "poolside/laguna-xs-2.1:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "anthropic/claude-sonnet-5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-sonnet-5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "google/gemini-3.1-flash-lite-image": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 65536,
+      "missedRuns": 0
+    },
+    "sakana/fugu-ultra": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "google/gemini-3.1-flash-image": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "google/gemini-3-pro-image": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "cohere/north-mini-code:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 256000,
+      "missedRuns": 0
+    },
+    "z-ai/glm-5.2": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.41e-8,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1792548440577
+    },
+    "openrouter/fusion": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": -1,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "moonshotai/kimi-k2.7-code": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6.712e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "~anthropic/claude-fable-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00001,
+      "ctx": 1000000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "anthropic/claude-fable-5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00001,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-fable-5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3.5-content-safety": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3.5-content-safety:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3-ultra-550b-a55b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3-ultra-550b-a55b:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.7-plus": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.2e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "minimax/minimax-m3": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "stepfun/step-3.7-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-4.8": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-4.8:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.7-max": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001475,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "x-ai/grok-build-0.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 256000,
+      "missedRuns": 0
+    },
+    "google/gemini-3.5-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000015,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3.5-flash:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "perceptron/perceptron-mk1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "google/gemini-3.1-flash-lite": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3.1-flash-lite:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.25e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "openai/gpt-chat-latest": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "x-ai/grok-4.3": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "x-ai/grok-4.3:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-medium-3-5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000015,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-medium-3-5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 256000,
+      "missedRuns": 0
+    },
+    "~anthropic/claude-haiku-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 1000000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "~openai/gpt-mini-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-7,
+      "ctx": 400000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "~google/gemini-pro-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "~moonshotai/kimi-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.9e-7,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "~google/gemini-flash-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "~anthropic/claude-sonnet-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1000000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "qwen/qwen3.5-plus-20260420": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.6-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.875e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.6-35b-a3b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 262144,
+      "missedRuns": 0,
+      "lastTransition": 1792458944602
+    },
+    "qwen/qwen3.6-max-preview": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692432,
+      "price": 0.000001027,
+      "ctx": 262144,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "qwen/qwen3.6-27b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.5-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00003,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.5-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000015,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-v4-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.088e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-v4-flash": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 9.1e-8,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "tencent/hy3-preview": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.8e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "xiaomi/mimo-v2.5-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.045e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "xiaomi/mimo-v2.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.19e-7,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.4-image-2": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000008,
+      "ctx": 272000,
+      "missedRuns": 0
+    },
+    "~anthropic/claude-opus-latest": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000004,
+      "ctx": 1000000,
+      "missedRuns": 0,
+      "lastTransition": 1790831051738
+    },
+    "openrouter/pareto-code": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": -1,
+      "ctx": 2000000,
+      "missedRuns": 0
+    },
+    "moonshotai/kimi-k2.6": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-4.7": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-4.7:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "z-ai/glm-5.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000014,
+      "ctx": 204800,
+      "missedRuns": 0
+    },
+    "google/gemma-4-26b-a4b-it": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6.75e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "google/gemma-4-26b-a4b-it:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "google/gemma-4-31b-it": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 262144,
+      "missedRuns": 0,
+      "lastTransition": 1792029743254
+    },
+    "google/gemma-4-31b-it:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.6-plus": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.25e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "z-ai/glm-5v-turbo": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000012,
+      "ctx": 202752,
+      "missedRuns": 0
+    },
+    "arcee-ai/trinity-large-thinking": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "x-ai/grok-4.20-multi-agent": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 2000000,
+      "missedRuns": 0
+    },
+    "x-ai/grok-4.20": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 2000000,
+      "missedRuns": 0
+    },
+    "google/lyria-3-pro-preview": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/lyria-3-clip-preview": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "rekaai/reka-edge": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 16384,
+      "missedRuns": 0
+    },
+    "minimax/minimax-m2.7": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 204800,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.4-nano": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.4-nano:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.4-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.4-mini:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.75e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-small-2603": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-small-2603:batch": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "z-ai/glm-5-turbo": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000012,
+      "ctx": 202752,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3-super-120b-a12b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 262144,
+      "missedRuns": 0,
+      "lastTransition": 1792606047896
+    },
+    "nvidia/nemotron-3-super-120b-a12b:free": {
+      "tier": "free",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "bytedance-seed/seed-2.0-lite": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.5-9b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.7e-7,
+      "ctx": 262144,
+      "missedRuns": 0,
+      "lastTransition": 1792732059618
+    },
+    "openai/gpt-5.4-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00003,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.4-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000015,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.4": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.4:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "inception/mercury-2": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "google/gemini-3.1-flash-lite-preview": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "bytedance-seed/seed-2.0-mini": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "google/gemini-3.1-flash-image-preview": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-7,
+      "ctx": 65536,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.5-35b-a3b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.4e-7,
+      "ctx": 262144,
+      "missedRuns": 0,
+      "lastTransition": 1791927513446
+    },
+    "qwen/qwen3.5-27b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.7e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.5-122b-a10b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.5-flash-02-23": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6.5e-8,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "google/gemini-3.1-pro-preview-customtools": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.3-codex": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000175,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "aion-labs/aion-2.0": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "google/gemini-3.1-pro-preview": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3.1-pro-preview:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "anthropic/claude-sonnet-4.6": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000003,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-sonnet-4.6:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000015,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.5-plus-02-15": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.6e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.5-397b-a17b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "minimax/minimax-m2.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 204800,
+      "missedRuns": 0
+    },
+    "z-ai/glm-5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 204800,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-max-thinking": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 7.8e-7,
+      "ctx": 262144,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "anthropic/claude-opus-4.6": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-4.6:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-coder-next": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.2e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "openrouter/free": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "stepfun/step-3.5-flash": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "moonshotai/kimi-k2.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "upstage/solar-pro-3": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "minimax/minimax-m2-her": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 65536,
+      "missedRuns": 0
+    },
+    "writer/palmyra-x5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-7,
+      "ctx": 1040000,
+      "missedRuns": 0
+    },
+    "openai/gpt-audio": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "openai/gpt-audio-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "z-ai/glm-4.7-flash": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6.05e-8,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.2-codex": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000175,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "bytedance-seed/seed-1.6-flash": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "bytedance-seed/seed-1.6": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "minimax/minimax-m2.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 204800,
+      "missedRuns": 0
+    },
+    "z-ai/glm-4.7": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5.4e-7,
+      "ctx": 204800,
+      "missedRuns": 0
+    },
+    "google/gemini-3-flash-preview": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-3-flash-preview:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3-nano-30b-a3b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.2-chat": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000175,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.2-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000021,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.2-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000105,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.2": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000175,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.2:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8.75e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "mistralai/devstral-2512": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "relace/relace-search": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 256000,
+      "missedRuns": 0
+    },
+    "z-ai/glm-4.6v": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "openrouter/bodybuilder": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": -1,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.1-codex-max": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "amazon/nova-2-lite-v1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "mistralai/ministral-14b-2512": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "mistralai/ministral-8b-2512": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "mistralai/ministral-8b-2512:batch": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "mistralai/ministral-3b-2512": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-large-2512": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-large-2512:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-v3.2": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.8e-7,
+      "ctx": 163840,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-4.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-4.5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "google/gemini-3-pro-image-preview": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 65536,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.1:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6.25e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.1-codex": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5.1-codex-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "moonshotai/kimi-k2-thinking": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "amazon/nova-premier-v1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "perplexity/sonar-pro-search": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000003,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "mistralai/voxtral-small-24b-2507": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "openai/gpt-oss-safeguard-20b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "minimax/minimax-m2": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.55e-7,
+      "ctx": 204800,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-vl-32b-instruct": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 1.04e-7,
+      "ctx": 131072,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "ibm-granite/granite-4.0-h-micro": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.7e-8,
+      "ctx": 131000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5-image-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-haiku-4.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-haiku-4.5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-7,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-vl-8b-thinking": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 1.8e-7,
+      "ctx": 131072,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "qwen/qwen3-vl-8b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "openai/gpt-5-image": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00001,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "google/gemini-2.5-flash-image": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-vl-30b-a3b-thinking": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.9e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-vl-30b-a3b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "openai/gpt-5-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000015,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000075,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "z-ai/glm-4.6": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5.5e-7,
+      "ctx": 204800,
+      "missedRuns": 0
+    },
+    "anthropic/claude-sonnet-4.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000003,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-sonnet-4.5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000015,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-v3.2-exp": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.7e-7,
+      "ctx": 163840,
+      "missedRuns": 0
+    },
+    "thedrummer/cydonia-24b-v4.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "relace/relace-apply-3": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8.5e-7,
+      "ctx": 256000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-vl-235b-a22b-thinking": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 4e-7,
+      "ctx": 131072,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "qwen/qwen3-vl-235b-a22b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.1e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-max": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 7.8e-7,
+      "ctx": 262144,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "qwen/qwen3-coder-plus": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 6.5e-7,
+      "ctx": 1000000,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "deepseek/deepseek-v3.1-terminus": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.7e-7,
+      "ctx": 163840,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-coder-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.95e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-next-80b-a3b-thinking": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-next-80b-a3b-instruct": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 9e-8,
+      "ctx": 262144,
+      "missedRuns": 0,
+      "lastTransition": 1791546154731
+    },
+    "qwen/qwen-plus-2025-07-28": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 2.6e-7,
+      "ctx": 1000000,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "moonshotai/kimi-k2-0905": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-30b-a3b-thinking-2507": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 2e-7,
+      "ctx": 81920,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "nousresearch/hermes-4-405b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-chat-v3.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 163840,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-medium-3.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-medium-3.1:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "z-ai/glm-4.5v": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-7,
+      "ctx": 65536,
+      "missedRuns": 0
+    },
+    "openai/gpt-5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6.25e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5-mini:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.25e-7,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5-nano": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-8,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-5-nano:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.5e-8,
+      "ctx": 400000,
+      "missedRuns": 0
+    },
+    "openai/gpt-oss-120b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 131072,
+      "missedRuns": 0,
+      "lastTransition": 1792029743255
+    },
+    "openai/gpt-oss-120b:batch": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.96e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "openai/gpt-oss-20b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.8e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "openai/gpt-oss-20b:batch": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.4e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-4.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000015,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-opus-4.1:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000075,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "mistralai/codestral-2508": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 256000,
+      "missedRuns": 0
+    },
+    "mistralai/codestral-2508:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 256000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-coder-30b-a3b-instruct": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-30b-a3b-instruct-2507": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 9e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "z-ai/glm-4.5": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "z-ai/glm-4.5-air": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.3e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-235b-a22b-thinking-2507": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4.5e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-coder": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "bytedance/ui-tars-1.5-7b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "google/gemini-2.5-flash-lite": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-2.5-flash-lite:batch": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792620089908,
+      "price": 5e-8,
+      "ctx": 1048576,
+      "missedRuns": 518,
+      "delistedAt": 1792620630371,
+      "lastTransition": 1792620630371
+    },
+    "qwen/qwen3-235b-a22b-2507": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 9e-8,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "moonshotai/kimi-k2": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5.7e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "cognitivecomputations/dolphin-mistral-24b-venice-edition": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "tencent/hunyuan-a13b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.4e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "morph/morph-v3-large": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 9e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "morph/morph-v3-fast": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "baidu/ernie-4.5-vl-424b-a47b": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791465070617,
+      "price": 4.2e-7,
+      "ctx": 123000,
+      "missedRuns": 1188,
+      "delistedAt": 1791546247443,
+      "lastTransition": 1791546247443
+    },
+    "mistralai/mistral-small-3.2-24b-instruct": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-8,
+      "ctx": 256000,
+      "missedRuns": 0
+    },
+    "minimax/minimax-m1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5.5e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "google/gemini-2.5-flash": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-2.5-flash:batch": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792485954528,
+      "price": 1.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 921,
+      "delistedAt": 1792548080383,
+      "lastTransition": 1792548080383
+    },
+    "google/gemini-2.5-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-2.5-pro:batch": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792485954528,
+      "price": 6.25e-7,
+      "ctx": 1048576,
+      "missedRuns": 921,
+      "delistedAt": 1792548080383,
+      "lastTransition": 1792548080383
+    },
+    "openai/o3-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00002,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "google/gemini-2.5-pro-preview": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-r1-0528": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-7,
+      "ctx": 163840,
+      "missedRuns": 0
+    },
+    "anthropic/claude-sonnet-4": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792051342915,
+      "price": 0.000003,
+      "ctx": 200000,
+      "missedRuns": 1114,
+      "delistedAt": 1792114069479,
+      "lastTransition": 1792114069479
+    },
+    "mistralai/mistral-medium-3": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "meta-llama/llama-guard-4-12b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.8e-7,
+      "ctx": 163840,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-30b-a3b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.2e-7,
+      "ctx": 40960,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-8b": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 1.17e-7,
+      "ctx": 131072,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "qwen/qwen3-14b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.2e-7,
+      "ctx": 40960,
+      "missedRuns": 0,
+      "lastTransition": 1791700139223
+    },
+    "qwen/qwen3-32b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "qwen/qwen3-235b-a22b": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1791547692433,
+      "price": 4.55e-7,
+      "ctx": 131072,
+      "missedRuns": 1183,
+      "delistedAt": 1791613536269,
+      "lastTransition": 1791613536269
+    },
+    "openai/o4-mini-high": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000011,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "openai/o3": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "openai/o3:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "openai/o4-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000011,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "openai/o4-mini:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5.5e-7,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "openai/gpt-4.1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 1047576,
+      "missedRuns": 0
+    },
+    "openai/gpt-4.1:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 1047576,
+      "missedRuns": 0
+    },
+    "openai/gpt-4.1-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-7,
+      "ctx": 1047576,
+      "missedRuns": 0
+    },
+    "openai/gpt-4.1-mini:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 1047576,
+      "missedRuns": 0
+    },
+    "openai/gpt-4.1-nano": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 1047576,
+      "missedRuns": 0
+    },
+    "openai/gpt-4.1-nano:batch": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-8,
+      "ctx": 1047576,
+      "missedRuns": 0
+    },
+    "meta-llama/llama-4-maverick": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.875e-7,
+      "ctx": 524288,
+      "missedRuns": 0
+    },
+    "meta-llama/llama-4-scout": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 1310720,
+      "missedRuns": 0,
+      "lastTransition": 1792161413477
+    },
+    "deepseek/deepseek-chat-v3-0324": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.9e-7,
+      "ctx": 163840,
+      "missedRuns": 0
+    },
+    "openai/o1-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00015,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.51e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "google/gemma-3-4b-it": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "google/gemma-3-12b-it": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "cohere/command-a": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 256000,
+      "missedRuns": 0
+    },
+    "rekaai/reka-flash-3": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 65536,
+      "missedRuns": 0
+    },
+    "google/gemma-3-27b-it": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "thedrummer/skyfall-36b-v2": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5.5e-7,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "perplexity/sonar-reasoning-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "perplexity/sonar-pro": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000003,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "perplexity/sonar-deep-research": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-saba": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "openai/o3-mini-high": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000011,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "aion-labs/aion-rp-llama-3.1-8b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8e-7,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "qwen/qwen2.5-vl-72b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "qwen/qwen-plus": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.6e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "openai/o3-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000011,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "openai/o3-mini:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5.5e-7,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-small-24b-instruct-2501": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-8,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "perplexity/sonar": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 127072,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-r1": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792372696857,
+      "price": 7e-7,
+      "ctx": 64000,
+      "missedRuns": 1077,
+      "delistedAt": 1792420325538,
+      "lastTransition": 1792420325538
+    },
+    "minimax/minimax-01": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2e-7,
+      "ctx": 1000192,
+      "missedRuns": 0
+    },
+    "microsoft/phi-4": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7e-8,
+      "ctx": 16384,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-chat": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.574e-7,
+      "ctx": 163840,
+      "missedRuns": 0
+    },
+    "sao10k/l3.3-euryale-70b": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792372696857,
+      "price": 6.5e-7,
+      "ctx": 131072,
+      "missedRuns": 1077,
+      "delistedAt": 1792420325538,
+      "lastTransition": 1792420325538
+    },
+    "openai/o1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000015,
+      "ctx": 200000,
+      "missedRuns": 0
+    },
+    "cohere/command-r7b-12-2024": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.75e-8,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "meta-llama/llama-3.3-70b-instruct": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 131072,
+      "missedRuns": 0,
+      "lastTransition": 1792161413477
+    },
+    "amazon/nova-lite-v1": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6e-8,
+      "ctx": 300000,
+      "missedRuns": 0
+    },
+    "amazon/nova-micro-v1": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.5e-8,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "amazon/nova-pro-v1": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8e-7,
+      "ctx": 300000,
+      "missedRuns": 0
+    },
+    "openai/gpt-4o-2024-11-20": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-large-2407": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "qwen/qwen-2.5-coder-32b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6.6e-7,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "thedrummer/unslopnemo-12b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-7,
+      "ctx": 1024000,
+      "missedRuns": 0
+    },
+    "anthracite-org/magnum-v4-72b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "qwen/qwen-2.5-7b-instruct": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1e-7,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "meta-llama/llama-3.2-1b-instruct": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.7e-8,
+      "ctx": 60000,
+      "missedRuns": 0
+    },
+    "meta-llama/llama-3.2-3b-instruct": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "qwen/qwen-2.5-72b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.6e-7,
+      "ctx": 32768,
+      "missedRuns": 0
+    },
+    "cohere/command-r-08-2024": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "cohere/command-r-plus-08-2024": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "sao10k/l3.1-euryale-70b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8.5e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "nousresearch/hermes-3-llama-3.1-70b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "nousresearch/hermes-3-llama-3.1-405b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "sao10k/l3-lunaris-8b": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-8,
+      "ctx": 8192,
+      "missedRuns": 0
+    },
+    "openai/gpt-4o-2024-08-06": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "meta-llama/llama-3.1-70b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-7,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "meta-llama/llama-3.1-8b-instruct": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 5e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-nemo": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 2.9e-8,
+      "ctx": 131072,
+      "missedRuns": 0
+    },
+    "openai/gpt-4o-mini": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "openai/gpt-4o-mini-2024-07-18": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 1.5e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "openai/gpt-4o-mini:batch": {
+      "tier": "cheap",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 7.5e-8,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "google/gemma-2-27b-it": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 6.5e-7,
+      "ctx": 8192,
+      "missedRuns": 0
+    },
+    "openai/gpt-4o": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.0000025,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "openai/gpt-4o-2024-05-13": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "openai/gpt-4o:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00000125,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "mistralai/mixtral-8x22b-instruct": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 65536,
+      "missedRuns": 0
+    },
+    "microsoft/wizardlm-2-8x22b": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792372696857,
+      "price": 6.2e-7,
+      "ctx": 65535,
+      "missedRuns": 1077,
+      "delistedAt": 1792420325538,
+      "lastTransition": 1792420325538
+    },
+    "openai/gpt-4-turbo": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00001,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "openai/gpt-4-turbo:batch": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000005,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-large": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000002,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "openai/gpt-3.5-turbo-0613": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000001,
+      "ctx": 4095,
+      "missedRuns": 0
+    },
+    "openrouter/auto": {
+      "tier": "blocked",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": -1,
+      "ctx": 2000000,
+      "missedRuns": 0
+    },
+    "openai/gpt-3.5-turbo-instruct": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792857166120,
+      "price": 0.0000015,
+      "ctx": 4095,
+      "missedRuns": 25,
+      "delistedAt": 1792904883287,
+      "lastTransition": 1792904883287
+    },
+    "openai/gpt-3.5-turbo-16k": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.000003,
+      "ctx": 16385,
+      "missedRuns": 0
+    },
+    "mancer/weaver": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 4e-7,
+      "ctx": 8000,
+      "missedRuns": 0
+    },
+    "undi95/remm-slerp-l2-13b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 3.5e-7,
+      "ctx": 6144,
+      "missedRuns": 0
+    },
+    "gryphe/mythomax-l2-13b": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 8e-8,
+      "ctx": 8192,
+      "missedRuns": 0
+    },
+    "openai/gpt-3.5-turbo": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792857166120,
+      "price": 5e-7,
+      "ctx": 16385,
+      "missedRuns": 25,
+      "delistedAt": 1792904883287,
+      "lastTransition": 1792904883287
+    },
+    "openai/gpt-3.5-turbo:batch": {
+      "tier": "delisted",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792857166120,
+      "price": 2.5e-7,
+      "ctx": 16385,
+      "missedRuns": 25,
+      "delistedAt": 1792904883287,
+      "lastTransition": 1792904883287
+    },
+    "openai/gpt-4": {
+      "tier": "premium",
+      "firstSeen": 1790829785705,
+      "lastSeen": 1792908844831,
+      "price": 0.00003,
+      "ctx": 8191,
+      "missedRuns": 0
+    },
+    "apodex/apodex-1.1-mini:free": {
+      "tier": "delisted",
+      "firstSeen": 1790914744590,
+      "lastSeen": 1791905913560,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 1127,
+      "delistedAt": 1791942260934,
+      "lastTransition": 1791942260934
+    },
+    "unbiased/pareto-26.10-preview": {
+      "tier": "delisted",
+      "firstSeen": 1790914744590,
+      "lastSeen": 1792072943097,
+      "price": 8e-7,
+      "ctx": 1048576,
+      "missedRuns": 1113,
+      "delistedAt": 1792114247539,
+      "lastTransition": 1792114247539
+    },
+    "inclusionai/ling-3.1-flash": {
+      "tier": "cheap",
+      "firstSeen": 1790958108342,
+      "lastSeen": 1792908844830,
+      "price": 7.5e-8,
+      "ctx": 262144,
+      "missedRuns": 0,
+      "lastTransition": 1791927513446
+    },
+    "nvidia/switchyard": {
+      "tier": "cheap",
+      "firstSeen": 1790983564933,
+      "lastSeen": 1792908844830,
+      "price": -1,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "google/gemini-nano-banana-2.1": {
+      "tier": "premium",
+      "firstSeen": 1791338583937,
+      "lastSeen": 1792908844830,
+      "price": 0.0000015,
+      "ctx": 65536,
+      "missedRuns": 0
+    },
+    "mistralai/mistral-large-4-0": {
+      "tier": "premium",
+      "firstSeen": 1791338583937,
+      "lastSeen": 1792908844830,
+      "price": 0.00000136,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "anthropic/claude-haiku-5.5": {
+      "tier": "cheap",
+      "firstSeen": 1791437584653,
+      "lastSeen": 1792908844830,
+      "price": 1e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "anthropic/claude-haiku-5.5:batch": {
+      "tier": "cheap",
+      "firstSeen": 1791437584653,
+      "lastSeen": 1792908844830,
+      "price": 5e-8,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "stepfun/step-5-preview": {
+      "tier": "premium",
+      "firstSeen": 1791465070617,
+      "lastSeen": 1792908844830,
+      "price": 0.000001,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "openai/gpt-6.1-sol-pro:batch": {
+      "tier": "premium",
+      "firstSeen": 1791546154729,
+      "lastSeen": 1792908844830,
+      "price": 0.000001,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "openai/gpt-6.1-sol:batch": {
+      "tier": "premium",
+      "firstSeen": 1791546154729,
+      "lastSeen": 1792908844830,
+      "price": 0.000001,
+      "ctx": 1050000,
+      "missedRuns": 0
+    },
+    "inclusionai/ling-3.0-flash-sante": {
+      "tier": "delisted",
+      "firstSeen": 1791546154729,
+      "lastSeen": 1791905913560,
+      "price": 4.2e-8,
+      "ctx": 262144,
+      "missedRuns": 1127,
+      "delistedAt": 1791942260934,
+      "lastTransition": 1791942260934
+    },
+    "meta/muse-wonder": {
+      "tier": "premium",
+      "firstSeen": 1791837566656,
+      "lastSeen": 1792908844830,
+      "price": 0.000004,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "scaledown/summarize": {
+      "tier": "cheap",
+      "firstSeen": 1791905913560,
+      "lastSeen": 1792908844830,
+      "price": 4e-8,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "scaledown/extract": {
+      "tier": "cheap",
+      "firstSeen": 1791905913560,
+      "lastSeen": 1792908844830,
+      "price": 4e-8,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "liquid/lfm-2.5-24b-a2b": {
+      "tier": "cheap",
+      "firstSeen": 1791927513446,
+      "lastSeen": 1792908844830,
+      "price": 5e-8,
+      "ctx": 128000,
+      "missedRuns": 0
+    },
+    "google/gemini-4-argon": {
+      "tier": "premium",
+      "firstSeen": 1791927513446,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "google/gemini-4-argon:batch": {
+      "tier": "premium",
+      "firstSeen": 1791927513446,
+      "lastSeen": 1792908844830,
+      "price": 0.000001,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "~unbiased/pareto-latest": {
+      "tier": "blocked",
+      "firstSeen": 1791941721897,
+      "lastSeen": 1792908844830,
+      "price": 8e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "unbiased/pareto-26.9": {
+      "tier": "premium",
+      "firstSeen": 1791941721897,
+      "lastSeen": 1792908844830,
+      "price": 0.0000025,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "moondream/moondream3-preview": {
+      "tier": "premium",
+      "firstSeen": 1792113888391,
+      "lastSeen": 1792908844830,
+      "price": 3e-7,
+      "ctx": 32000,
+      "missedRuns": 0
+    },
+    "moondream/moondream3.1-9b-a2b": {
+      "tier": "premium",
+      "firstSeen": 1792113888391,
+      "lastSeen": 1792908844830,
+      "price": 3e-7,
+      "ctx": 32000,
+      "missedRuns": 0
+    },
+    "meta/muse-spark-open": {
+      "tier": "premium",
+      "firstSeen": 1792113888391,
+      "lastSeen": 1792908844830,
+      "price": 0.00000125,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "nvidia/nemotron-3.5-super-vl": {
+      "tier": "premium",
+      "firstSeen": 1792113888391,
+      "lastSeen": 1792908844830,
+      "price": 1.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0,
+      "lastTransition": 1792457324085
+    },
+    "nvidia/nemotron-3.5-super-vl:free": {
+      "tier": "free",
+      "firstSeen": 1792113888391,
+      "lastSeen": 1792908844830,
+      "price": 0,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "xingchen-agi/xing4.0-29b-a4b:free": {
+      "tier": "free",
+      "firstSeen": 1792204437335,
+      "lastSeen": 1792908844830,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "reflection/beam-1.0-501b-a23b": {
+      "tier": "premium",
+      "firstSeen": 1792204437335,
+      "lastSeen": 1792908844830,
+      "price": 2.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "qwen/qwen3.7-plus:batch": {
+      "tier": "premium",
+      "firstSeen": 1792204437336,
+      "lastSeen": 1792908844831,
+      "price": 2.3e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "deepseek/deepseek-v4.1-flash-1017": {
+      "tier": "premium",
+      "firstSeen": 1792226277104,
+      "lastSeen": 1792908844830,
+      "price": 1.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "elorian/glimpse": {
+      "tier": "premium",
+      "firstSeen": 1792226277104,
+      "lastSeen": 1792908844830,
+      "price": 6e-7,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "unbiased/pareto-26.10": {
+      "tier": "premium",
+      "firstSeen": 1792291077897,
+      "lastSeen": 1792908844830,
+      "price": 8e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "minimax/minimax-m3.1-flash:free": {
+      "tier": "delisted",
+      "firstSeen": 1792411684692,
+      "lastSeen": 1792657715684,
+      "price": 0,
+      "ctx": 1000000,
+      "missedRuns": 309,
+      "delistedAt": 1792719795489,
+      "lastTransition": 1792719795489
+    },
+    "inception/mercury-3": {
+      "tier": "cheap",
+      "firstSeen": 1792457324084,
+      "lastSeen": 1792908844830,
+      "price": 1e-7,
+      "ctx": 1000000,
+      "missedRuns": 0
+    },
+    "recursive/flint-v1.0:free": {
+      "tier": "free",
+      "firstSeen": 1792613968895,
+      "lastSeen": 1792908844830,
+      "price": 0,
+      "ctx": 262144,
+      "missedRuns": 0
+    },
+    "minimax/minimax-m3.1-flash": {
+      "tier": "premium",
+      "firstSeen": 1792679316439,
+      "lastSeen": 1792908844830,
+      "price": 1.5e-7,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "moonshotai/kimi-k3.1-pro": {
+      "tier": "premium",
+      "firstSeen": 1792781799843,
+      "lastSeen": 1792908844830,
+      "price": 0.000002,
+      "ctx": 1048576,
+      "missedRuns": 0
+    },
+    "liquid/lfm-2.5-2.6b": {
+      "tier": "premium",
+      "firstSeen": 1792904523854,
+      "lastSeen": 1792908844830,
+      "price": 3.5e-7,
+      "ctx": 128000,
+      "missedRuns": 0
+    }
+  },
+  "updatedAt": "2026-10-25T06:14:04.829Z"
+}

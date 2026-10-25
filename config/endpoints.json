@@ -1,0 +1,85 @@
+{
+  "mode": "auto",
+  "endpoints": [
+    {
+      "id": "intern-ai",
+      "name": "书生·端砚",
+      "base_url": "https://discovery-api.intern-ai.org.cn/v1",
+      "key_file": "book.key",
+      "models": [
+        "intern-s2",
+        "Atria-Dawn-Preview",
+        "Agents-A1",
+        "deepseek-v4-flash-0731",
+        "deepseek-v4-flash-vision",
+        "deepseek-v4-pro-0813",
+        "glm-5.3",
+        "kimi-k2.6",
+        "minimax-m3",
+        "qwen3.8-27b"
+      ],
+      "priority": 1,
+      "thinking": {
+        "math": true,
+        "paper": true,
+        "board": true,
+        "resume": true,
+        "jd": true,
+        "apply": true,
+        "code": false,
+        "data": false,
+        "tool": false,
+        "envops": false,
+        "site": false,
+        "adb": false,
+        "agent": false,
+        "misc": false
+      },
+      "noquota": [
+        "intern-s2",
+        "Atria-Dawn-Preview",
+        "Agents-A1"
+      ]
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter",
+      "base_url": "https://openrouter.ai/api/v1",
+      "key_env": "OPENROUTER_API_KEY",
+      "models": [
+        "inclusionai/ling-3.0-flash-vl",
+        "qwen/qwen3.8-27b:free",
+        "nex-agi/nex-n2.5-pro",
+        "qwen/qwen3.7-flash",
+        "deepseek/deepseek-chat"
+      ],
+      "priority": 2,
+      "reasoning": {
+        "math": "high",
+        "paper": "high",
+        "board": "medium",
+        "resume": "medium",
+        "jd": "medium",
+        "apply": "medium",
+        "code": "low",
+        "data": "low",
+        "tool": "low",
+        "envops": "low",
+        "site": "low",
+        "adb": "low",
+        "agent": "medium",
+        "misc": "none"
+      }
+    }
+  ],
+  "routing": {
+    "auto": {
+      "short": "intern-ai",
+      "long": "intern-ai",
+      "fallback": "openrouter"
+    },
+    "manual": {
+      "tasks": {}
+    }
+  }
+}
