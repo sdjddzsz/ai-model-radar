@@ -13,3 +13,31 @@ backups/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# === 网关运行时产物（本地部署产生：密钥/状态/日志/大数据）===
+gateway.key
+gateway.pid
+gateway-log.jsonl
+gateway-prices.json
+gateway-modalities.json
+gateway-quota.json
+gw-daemon.log
+_ailens_server.log
+_gateway.log
+_gw_start.log
+_gwtest*.json
+_chk_pid.txt
+_kill*.txt
+_ps_*.txt
+_srvpid.txt
+_taskinfo.txt
+
+# 本地调试残留
+tmp/
+_归档_20261008/
+_patch_backup_20261007/
+bench-results.json
+bench-redo.log
+
+# 含真实 API Key 的临时测试脚本（禁止入库）
+test_intern.mjs
